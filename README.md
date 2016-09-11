@@ -1,3 +1,3 @@
 # TiRAHa
 
-Jotain kirjoitusta
+Tietorakenteet ja algoritmit harjoitustyö
