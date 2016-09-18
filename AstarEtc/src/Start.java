@@ -1,33 +1,50 @@
 
 public class Start {
-    
-    public static Node[][] createNet(int n, Node startNode, Node endNode) {
-    
+    /**
+     * the starting point of a search
+     */
+    private Node startNode;
+    /**
+     * the end node of a search
+     */
+    private Node endNode;
+
+    /**
+     * Creates a matrix/net of nodes and sets the start and end distances for
+     * all nodes including start node and end node
+     * @param n integer, received as a parameter, the size of the node matrix
+     * @param startY integer, received as a parameter, y coordinate of the start node
+     * @param startX integer, received as a parameter, x coordinate of the start node
+     * @param endY integer, received as a parameter, y coordinate of the end node
+     * @param endX integer, received as a parameter, x coordinate of the end node
+     * @return 
+     */
+    public Node[][] createNet(int n, int startY, int startX, int endY, int endX) {
         Node[][] net = new Node[n][n];
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-              //  net[i][j] = new Node(i, j, 0, 0, i);
-                net[i][j] = new Node(i, j, Integer.MAX_VALUE, Math.abs((i - endNode.getI()) + (j - endNode.getJ())), 0);
-                   System.out.print(net[i][j].getEndD());
-                  // System.out.println("");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == startY && j == startX) {
+                    startNode = new Node(i, j, 0, Math.abs((i - endY) + (j - endX)), 0);
+                    net[i][j] = startNode;
+                } else if (i == endY && j == endX) {
+                    endNode = new Node(i, j, Integer.MAX_VALUE, Math.abs((i - endY) + (j - endX)), 0);
+                    net[i][j] = endNode;
+                } else {
+                    net[i][j] = new Node(i, j, Integer.MAX_VALUE, Math.abs((i - endY) + (j - endX)), 0);
+                }
+
+                System.out.print(net[i][j].getEndD());
             }
             System.out.println("");
         }
-    //    initialize(net, startNode, endNode);
-        
         return net;
     }
 
-//    public static void initialize(Node[][] nodes, Node startNode, Node endNode) {
-//        for (int i = 0; i < nodes.length; i++) {
-//            for (int j = 0; j < nodes.length; j++) {
-//                nodes[i][j].setStartD(Integer.MAX_VALUE);
-//                nodes[i][j].setEndD(Math.abs((i - endNode.getI()) + (j - endNode.getJ())));
-//                System.out.print(nodes[i][j].getEndD());
-//
-//            }
-//                 System.out.println("");
-//        }
-//    }
-//
+    public Node getStartNode() {
+        return startNode;
+    }
+
+    public Node getEndNode() {
+        return endNode;
+    }
 }

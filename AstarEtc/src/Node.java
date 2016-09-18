@@ -1,35 +1,58 @@
 
 public class Node implements Comparable<Node> {
 
-    private int i;
-    private static int j;
-    private static int endDist;
-    private static int startDist;
-    private static int weight;
+    /**
+     * the value of y coordinate in a matrix
+     */
+    private int y;
+    /**
+     * the value of x coordinate in a matrix
+     */
+    private int x;
+    /**
+     * the actual distance between a node and the goal node
+     */
+    private int startDist;
+    /**
+     * the shortest possible distance between the node and a goal node
+     */
+    private int endDist;
+    /**
+     * the cost of visiting the node
+     */
+    private int weight;
 
-    public Node(int i, int j, int startDist, int endDist, int weight) {
-        this.i = i;
-        this.j = j;
+    /**
+     *Creates a new node with following parameters
+     * @param y integer, received as a parameter 
+     * @param x integer, received as a parameter 
+     * @param startDist integer, received as a parameter
+     * @param endDist integer, received as a parameter
+     * @param weight integer, received as a parameter
+     */
+    public Node(int y, int x, int startDist, int endDist, int weight) {
+        this.y = y;
+        this.x = x;
         this.startDist = startDist;
         this.endDist = endDist;
         this.weight = weight;
 
     }
 
-    public int getI() {
-        return this.i;
+    public int getY() {
+        return this.y;
     }
 
-    public void setI(int i) {
-        this.i = i;
+    public void setY(int y) {
+        this.y = y;
     }
 
-    public int getJ() {
-        return this.j;
+    public int getX() {
+        return this.x;
     }
 
-    public void setJ(int j) {
-        this.j = j;
+    public void setX(int x) {
+        this.x = x;
     }
 
     public int getStartD() {
@@ -51,9 +74,9 @@ public class Node implements Comparable<Node> {
     public int getWeight() {
         return this.weight;
     }
-  
+
     @Override
     public int compareTo(Node node) {
-        return (this.startDist+this.endDist) - (node.startDist+node.endDist);
+        return (this.startDist + this.endDist) - (node.startDist + node.endDist);
     }
 }

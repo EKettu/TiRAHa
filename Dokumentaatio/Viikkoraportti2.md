@@ -11,3 +11,6 @@
 
 17.9.16
 -2h A*:rin ohjelmointia, ohjelman alustus ja vieraslistauksen säätöä
+
+17.9.16
+-4h ohjelman koodausta (valitettavan suuri osa ajasta kului naurettavan NullPointerExceptionin metsästykseen) sekä testien kirjoitusta. Tuntuu vaikealta keksiä järkeviä testejä Astar-luokan testaamiseen. Lisäksi koodista puuttuu vielä tapa dokumentoida itse lyhin polku, se pitää saada seuraavaksi tehtyä. 

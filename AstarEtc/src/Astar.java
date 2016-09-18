@@ -3,17 +3,34 @@ import java.util.*;
 
 public class Astar {
 
+    /**
+     *set of nodes already visited
+     */
     private static HashSet<Node> visited;
+    /**
+     * heap from which the next node to be processed is selected
+     */
     private static PriorityQueue<Node> nodeheap;
-    //   private static LinkedList<Node[]> nodelist;
+    /**
+     * map containing the adjacent nodes
+     */
     private static Map<Node, ArrayList<Node>> adjlist;
-
-    public static void astar(int n, Node startNode, Node endNode) {
+    /**
+     * A* algorithm, calculates the shortest path between two nodes
+     * @param n integer, received as a parameter, the size of the node matrix
+     * @param startY integer, received as a parameter, y coordinate of the start node
+     * @param startX integer, received as a parameter, x coordinate of the start node
+     * @param endY integer, received as a parameter, y coordinate of the end node
+     * @param endX integer, received as a parameter, x coordinate of the end node
+     */
+    public static void astar(int n, int startY, int startX, int endY, int endX) {
         nodeheap = new PriorityQueue<Node>();
-        //    nodelist = new LinkedList<Node[]>();
         visited = new HashSet<Node>();
-        Start alku = new Start();
-        Node[][] net = alku.createNet(n, startNode, endNode);
+        Start start = new Start();
+        Node[][] net = start.createNet(n, startY, startX, endY, endX);
+        Node startNode = start.getStartNode();
+        Node endNode = start.getEndNode();
+
         list(net);
         startNode.setStartD(0);
         nodeheap.add(startNode);
@@ -21,20 +38,20 @@ public class Astar {
         while (!visited.contains(endNode)) {
             Node node = nodeheap.poll();
             visited.add(node);
-            for (Node adjNode : adjlist.get(node)) {
 
-                if (adjNode.getStartD() > node.getStartD() + adjNode.getWeight()) {
+            for (Node adjNode : adjlist.get(node)) {
+                if (adjNode.getStartD() > node.getStartD() + node.getWeight()) {
                     adjNode.setStartD(node.getStartD() + adjNode.getWeight());
                     nodeheap.add(adjNode);
                 }
-
             }
         }
-
     }
-
+/**
+ * Creates the adjacency list for all nodes
+ * @param net Node[][], received as a parameter, contains all nodes in the net
+ */
     public static void list(Node[][] net) {
-
         adjlist = new HashMap<Node, ArrayList<Node>>();
         for (int i = 0; i < net.length; i++) {
             for (int j = 0; j < net.length; j++) {
@@ -51,9 +68,13 @@ public class Astar {
                 }
                 if (j - 1 >= 0) {
                     adjlist.get(net[i][j]).add(net[i][j - 1]);
-
                 }
             }
         }
+
+    }
+    
+    public Map<Node, ArrayList<Node>> getAdjList() {
+        return adjlist;
     }
 }

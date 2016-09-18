@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,55 +7,35 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author elinakettunen
- */
+
 public class AstarTest {
     
+    Astar astar;
+
     public AstarTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
+        astar = new Astar();
     }
-    
+
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of astar method, of class Astar.
-     */
+   
     @Test
-    public void testAstar() {
-        System.out.println("astar");
-        Node[][] net = null;
-        Node startNode = null;
-        Node endNode = null;
-        Astar.astar(net, startNode, endNode);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of main method, of class Astar.
-     */
-    @Test
-    public void testMain() {
-        System.out.println("main");
-        String[] args = null;
-        Astar.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void adjacencyListRightSize() {
+        astar.astar(4, 0, 0, 3, 3);
+        assertEquals(16, astar.getAdjList().size());      
     }
     
 }
