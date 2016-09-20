@@ -6,6 +6,6 @@ public class Main {
      */
     public static void main(String[] args) {
         Astar astar = new Astar();
-        astar.astar(4, 0, 0, 3, 3);
+        astar.astar(10, 0, 0, 7, 9);
     }
 }
