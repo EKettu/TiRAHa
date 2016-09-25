@@ -1,0 +1,67 @@
+
+public class MyStack {
+
+    /**
+     * a table for integers in a stack
+     */
+    private int[] table;
+    /*
+     * a pointer to the top of the stack
+     */
+    private int top;
+
+    /**
+     * A stack data structure for integers (node's ID numbers)
+     *
+     * @param n, integer, received as a parameter, length of the stack
+     */
+    public MyStack(int n) {
+        top = -1;
+        table = new int[n];
+    }
+
+    /**
+     * Method to remove the topmost integer in a stack
+     *
+     * @return the integer that was removed from the stack
+     */
+    public int pop() {
+        if (!empty()) {
+            int removed = table[top];
+            top--;
+            return removed;
+        }
+        return -1;
+    }
+
+    /*
+     * Method to add an integer into a stack
+     */
+    public void push(int x) {
+        top++;
+        if (!full()) {
+            table[top] = x;
+        } else {
+            System.out.println("The Stack is full.");
+        }
+    }
+
+    /**
+     * Method to check if the stack is empty
+     *
+     * @return true if the stack has no integers left
+     */
+    public boolean empty() {
+        return top == -1;
+    }
+
+    /**
+     * Method to check if the stack is full
+     *
+     * @return true if the stack is full and no integers will be added
+     */
+    public boolean full() {
+        return top == table.length - 1;
+    }
+
+}

@@ -20,7 +20,7 @@ public class NodeTest {
 
     @Before
     public void setUp() {
-        node = new Node(0, 0, 0, 0, 0);
+        node = new Node(1, 0, 0, 0, 0, 0);
     }
 
     @After

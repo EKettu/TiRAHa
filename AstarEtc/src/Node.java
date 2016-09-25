@@ -1,4 +1,5 @@
 
+
 public class Node implements Comparable<Node> {
 
     /**
@@ -21,6 +22,8 @@ public class Node implements Comparable<Node> {
      * the cost of visiting the node
      */
     private int weight;
+    
+    private int number;
 
     /**
      *Creates a new node with following parameters
@@ -30,12 +33,14 @@ public class Node implements Comparable<Node> {
      * @param endDist integer, received as a parameter
      * @param weight integer, received as a parameter
      */
-    public Node(int y, int x, int startDist, int endDist, int weight) {
+    public Node(int number, int y, int x, int startDist, int endDist, int weight) {
+        this.number = number;
         this.y = y;
         this.x = x;
         this.startDist = startDist;
         this.endDist = endDist;
         this.weight = weight;
+        
 
     }
 
@@ -73,6 +78,10 @@ public class Node implements Comparable<Node> {
 
     public int getWeight() {
         return this.weight;
+    }
+    
+    public int getNumber() {
+        return number;
     }
 
     @Override
