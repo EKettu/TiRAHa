@@ -1,4 +1,7 @@
+package graph;
 
+import graph.Node;
+import datastructures.MyStack;
 import java.util.*;
 
 public class Path {
@@ -7,6 +10,7 @@ public class Path {
      * length of the shortest path
      */
     private static int length;
+
     /**
      * Method to print the shortest path between two nodes
      *
@@ -17,18 +21,22 @@ public class Path {
     public static void shortestPath(HashMap<Node, Node> path, Node node, Node startNode) {
         Node node2 = path.get(node);
         MyStack stack = new MyStack(path.size());
+        // Stack<Node> stack = new Stack<Node>();
         while (node2 != startNode) {
+            //  stack.push(node2);
             stack.push(node2.getNumber());
             node2 = path.get(node2);
         }
         length = 0;
         System.out.println("Polku koostuu solmuista : ");
+        System.out.print(startNode.getNumber() + " ");
         while (!stack.empty()) {
+            // Node node3= stack.pop();
             int x = stack.pop();
             System.out.print(x + " ");
             length++;
         }
-        
+
         System.out.print(node.getNumber());
         length++;
         System.out.println("");
@@ -63,7 +71,7 @@ public class Path {
             System.out.println("");
         }
     }
-    
+
     public int getLength() {
         return length;
     }

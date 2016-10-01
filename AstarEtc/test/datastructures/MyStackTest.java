@@ -1,4 +1,6 @@
+package datastructures;
 
+import datastructures.MyStack;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -41,6 +43,7 @@ public class MyStackTest {
         assertEquals(3, stack.pop());
     }
 
+    @Test
     public void fullWorks() {
         stack.push(1);
         stack.push(2);
@@ -48,7 +51,8 @@ public class MyStackTest {
         stack.push(4);
         assertEquals(true, stack.full());
     }
-    
+
+    @Test
     public void emptyWorks() {
         stack.push(1);
         stack.push(2);

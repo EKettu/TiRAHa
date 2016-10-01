@@ -1,4 +1,7 @@
 
+import algorithms.Astar;
+
+
 public class Main {
 
     /**
@@ -6,6 +9,8 @@ public class Main {
      */
     public static void main(String[] args) {
         Astar astar = new Astar();
-        astar.astar(5, 0, 0, 3, 4);
+        long timestamp = System.currentTimeMillis();
+        astar.astar(15, 0, 0, 9, 9);
+        System.out.println("Aikaa kului " +(System.currentTimeMillis()-timestamp) + " ms");
     }
 }

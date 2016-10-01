@@ -1,4 +1,7 @@
+package graph;
 
+import graph.Start;
+import graph.Node;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

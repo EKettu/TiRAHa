@@ -1,4 +1,4 @@
-
+package graph;
 
 public class Node implements Comparable<Node> {
 
@@ -22,13 +22,18 @@ public class Node implements Comparable<Node> {
      * the cost of visiting the node
      */
     private int weight;
-    
+
+    /*
+     * serial number of a node
+     */
     private int number;
 
     /**
-     *Creates a new node with following parameters
-     * @param y integer, received as a parameter 
-     * @param x integer, received as a parameter 
+     * Creates a new node with following parameters
+     *
+     * @param number, integer, received as a parameter
+     * @param y integer, received as a parameter
+     * @param x integer, received as a parameter
      * @param startDist integer, received as a parameter
      * @param endDist integer, received as a parameter
      * @param weight integer, received as a parameter
@@ -40,7 +45,6 @@ public class Node implements Comparable<Node> {
         this.startDist = startDist;
         this.endDist = endDist;
         this.weight = weight;
-        
 
     }
 
@@ -79,7 +83,7 @@ public class Node implements Comparable<Node> {
     public int getWeight() {
         return this.weight;
     }
-    
+
     public int getNumber() {
         return number;
     }

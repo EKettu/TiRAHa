@@ -1,4 +1,6 @@
+package graph;
 
+import graph.Node;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -31,7 +33,6 @@ public class NodeTest {
     public void methodSetYWorks() {
         node.setY(3);
         assertEquals(3, node.getY());
-
     }
 
     @Test

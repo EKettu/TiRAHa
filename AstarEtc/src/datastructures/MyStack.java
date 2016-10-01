@@ -1,3 +1,4 @@
+package datastructures;
 
 public class MyStack {
 
@@ -58,7 +59,7 @@ public class MyStack {
     /**
      * Method to check if the stack is full
      *
-     * @return true if the stack is full and no integers will be added
+     * @return true if the stack is full and no integers can be added
      */
     public boolean full() {
         return top == table.length - 1;

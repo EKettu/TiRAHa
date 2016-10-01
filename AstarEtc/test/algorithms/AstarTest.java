@@ -1,5 +1,6 @@
+package algorithms;
 
-
+import algorithms.Astar;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -7,9 +8,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-
 public class AstarTest {
-    
+
     Astar astar;
 
     public AstarTest() {
@@ -31,11 +31,11 @@ public class AstarTest {
     @After
     public void tearDown() {
     }
-   
+
     @Test
     public void adjacencyListRightSize() {
         astar.astar(4, 0, 0, 3, 3);
-        assertEquals(16, astar.getAdjList().size());      
+        assertEquals(16, astar.getAdjList().size());
     }
-    
+
 }
