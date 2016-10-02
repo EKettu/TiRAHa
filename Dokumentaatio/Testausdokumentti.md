@@ -1,4 +1,4 @@
-*Suorituskykytestausta 1.9.16
+*Suorituskykytestausta 1.9.16 A*-algoritmi
 
 Testi1
 astar.astar(100, 0, 0, 99, 99);
@@ -54,5 +54,5 @@ Suorituskerta 1. Aikaa kului 7525 ms
 Suorituskerta 2. Aikaa kului 6934 ms
 Suorituskerta 3. Aikaa kului 7177 ms
 
-
+//Mainittakoon, että näissä testeissä A* ei siis toimi optimaalisella tavalla...
 
