@@ -1,6 +1,6 @@
 package algorithms;
 
-import graph.Start;
+import graph.NetBuilder;
 import graph.Path;
 import graph.Node;
 import datastructures.Heap;
@@ -15,29 +15,31 @@ public class IDAstar {
     /**
      * nodes that have been visited
      */
-    private static boolean[][] visited;
+    private boolean[][] visited;
     /**
      * starting point of the search
      */
-    private static Node startNode;
+    private Node startNode;
     /**
      * end point of the search
      */
-    private static Node endNode;
+    private Node endNode;
     /**
      * map containing the adjacent nodes
      */
-    private static Map<Node, MyArrayList> adjlist;
+    private Map<Node, MyArrayList> adjlist;
     /**
      * tells if endNode has been found
      */
-    private static boolean found;
+    private boolean found;
 
     //Toistaiseksi mukana, visited[][] korvaa 
     /**
      * set of nodes already visited
      */
-    private static HashSet<Node> visitedNodes;
+    private HashSet<Node> visitedNodes;
+    
+    private HashMap<Node, Node> path;
 
     /**
      * IDA* algorithm, calculates the shortest path between two nodes
@@ -51,13 +53,14 @@ public class IDAstar {
      * node
      * @param endX integer, received as a parameter, x coordinate of the end
      */
-    public static void idastar(int n, int startY, int startX, int endY, int endX) {
+    public void idastar(int n, int startY, int startX, int endY, int endX) {
         visited = new boolean[n][n];
         visitedNodes = new HashSet<Node>();
-        Start start = new Start();
-        Node[][] net = start.createNet(n, startY, startX, endY, endX);
-        startNode = start.getStartNode();
-        endNode = start.getEndNode();
+        path = new HashMap<Node, Node>();
+        NetBuilder netbuild = new NetBuilder();
+        Node[][] net = netbuild.createNet(n, startY, startX, endY, endX);
+        startNode = netbuild.getStartNode();
+        endNode = netbuild.getEndNode();
         createAdjList(net);
 
         found = false;
@@ -65,6 +68,7 @@ public class IDAstar {
             DFS(net, startNode, endNode);
         }
         Path path2 = new Path();
+        path2.shortestPath(path, endNode, startNode);
         path2.showPath(net, visitedNodes, startNode, endNode);
 
     }
@@ -76,11 +80,11 @@ public class IDAstar {
      * @param node Node, received as a parameter, starting point of DFS
      * @param endNode Node, received as a parameter, end point of DFS
      */
-    private static void DFS(Node[][] net, Node node, Node endNode) {
+    private void DFS(Node[][] net, Node node, Node endNode) {
         visited[node.getY()][node.getX()] = true;
         visitedNodes.add(node);
         for (int i = 0; i < adjlist.get(node).size(); i++) {
-            Node adjNode = adjlist.get(node).get(i);
+            Node adjNode = (Node)adjlist.get(node).get(i);
 
             if (!visited[adjNode.getY()][adjNode.getX()]) {
                 if (adjNode == endNode) {
@@ -95,6 +99,7 @@ public class IDAstar {
                 }
             }
             visited[adjNode.getY()][adjNode.getX()] = true;
+            path.put(adjNode, node);
             // visitedNodes.add(adjNode);
         }
     }
@@ -105,7 +110,7 @@ public class IDAstar {
      * @param net Node[][], received as a parameter, contains all nodes in the
      * net
      */
-    public static void createAdjList(Node[][] net) {
+    public void createAdjList(Node[][] net) {
         adjlist = new HashMap<Node, MyArrayList>();
         for (int i = 0; i < net.length; i++) {
             for (int j = 0; j < net.length; j++) {

@@ -1,6 +1,6 @@
 package graph;
 
-import graph.Start;
+import graph.NetBuilder;
 import graph.Node;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -9,9 +9,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class StartTest {
+public class NetBuilderTest {
 
-    Start start;
+    NetBuilder start;
 
     @BeforeClass
     public static void setUpClass() {
@@ -23,7 +23,7 @@ public class StartTest {
 
     @Before
     public void setUp() {
-        start = new Start();
+        start = new NetBuilder();
     }
 
     @After

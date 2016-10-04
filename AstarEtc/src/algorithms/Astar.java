@@ -1,74 +1,70 @@
 package algorithms;
 
-import graph.Start;
+import graph.NetBuilder;
 import graph.Path;
 import graph.Node;
 import datastructures.Heap;
 import datastructures.MyArrayList;
+import java.io.File;
 import java.util.*;
+import utilities.FileReader;
 
 public class Astar {
 
     /**
      * set of nodes already visited
      */
-    private static HashSet<Node> visited;
+    private HashSet<Node> visited;
 //    /**
 //     * heap from which the next node to be processed is selected
 //     */
-  //  private static PriorityQueue<Node> nodeheap;
+    //  private static PriorityQueue<Node> nodeheap;
     /**
      * map containing the adjacent nodes
      */
-  //  private static Map<Node, ArrayList<Node>> adjlist;
-    private static Map<Node, MyArrayList> adjlist2;
+    //  private static Map<Node, ArrayList<Node>> adjlist;
+    private Map<Node, MyArrayList<Node>> adjlist;
     /**
      * starting point of the search
      */
-    private static Node startNode;
+    private Node startNode;
     /**
      * end point of the search
      */
-    private static Node endNode;
+    private Node endNode;
 
-    
     /**
      * A* algorithm, calculates the shortest path between two nodes
-     *
-     * @param n integer, received as a parameter, the size of the node matrix
-     * @param startY integer, received as a parameter, y coordinate of the start
-     * node
-     * @param startX integer, received as a parameter, x coordinate of the start
-     * node
-     * @param endY integer, received as a parameter, y coordinate of the end
-     * node
-     * @param endX integer, received as a parameter, x coordinate of the end
-     * node
      */
-    public static void astar(int n, int startY, int startX, int endY, int endX) {
-       //   nodeheap = new PriorityQueue<Node>();
+    public void astar() {
+        //   nodeheap = new PriorityQueue<Node>();
         visited = new HashSet<Node>();
-        Start start = new Start();
-        Node[][] net = start.createNet(n, startY, startX, endY, endX);
-        startNode = start.getStartNode();
-        endNode = start.getEndNode();
+        NetBuilder netbuild = new NetBuilder();
+        FileReader filereader = new FileReader(); //siirrettävä Mainiin...
+        MyArrayList netArray = filereader.readNetFromFile(new File("test.txt"));
+
+        // Node[][] net = netbuild.createNet(n, startY, startX, endY, endX);
+        Node[][] net = netbuild.createNetFromArray(netArray);
+
+        startNode = netbuild.getStartNode();
+        endNode = netbuild.getEndNode();
         HashMap<Node, Node> path = new HashMap<Node, Node>();
 
-        Heap heap = new Heap(n);
-        Node[] table = new Node[n * n];
-
-        createAdjList(net);
+        Heap heap = new Heap(net.length);
+        Node[] table = new Node[net.length * net.length];
         startNode.setStartD(0);
-       //  nodeheap.add(startNode);
+        createAdjList(net);
+
+        //  nodeheap.add(startNode);
         heap.heapInsert(table, startNode);
 
         while (!visited.contains(endNode)) { //jos ei polkua löydy, säädettävä
-           //  Node node = nodeheap.poll();
+            //  Node node = nodeheap.poll();
             Node node = heap.heapDeleteMin(table);
+            //  System.out.println("Noden numero " + node.getNumber());
             visited.add(node);
-
-            for (int i = 0; i < adjlist2.get(node).size(); i++) {
-                Node adjNode = adjlist2.get(node).get(i);
+            for (int i = 0; i < adjlist.get(node).size(); i++) {
+                Node adjNode = adjlist.get(node).get(i);
                 if (adjNode.getStartD() > node.getStartD() + adjNode.getWeight()) {
                     adjNode.setStartD(node.getStartD() + adjNode.getWeight());
                     heap.heapInsert(table, adjNode);
@@ -83,8 +79,7 @@ public class Astar {
 //
 //                }
             }
-            }
-        
+        }
         Path path2 = new Path();
         path2.shortestPath(path, endNode, startNode);
         path2.showPath(net, visited, startNode, endNode);
@@ -97,39 +92,38 @@ public class Astar {
      * @param net Node[][], received as a parameter, contains all nodes in the
      * net
      */
-    public static void createAdjList(Node[][] net) {
-         // adjlist = new HashMap<Node, ArrayList<Node>>();
-        adjlist2 = new HashMap<Node, MyArrayList>();
+    public void createAdjList(Node[][] net) {
+        // adjlist = new HashMap<Node, ArrayList<Node>>();
+        adjlist = new HashMap<Node, MyArrayList<Node>>();
         for (int i = 0; i < net.length; i++) {
             for (int j = 0; j < net.length; j++) {
                 // adjlist.put(net[i][j], new ArrayList<Node>());
-                adjlist2.put(net[i][j], new MyArrayList());
-                if (i + 1 < net.length) {
-                  //   adjlist.get(net[i][j]).add(net[i + 1][j]);
-                    adjlist2.get(net[i][j]).add(net[i + 1][j]);
+                adjlist.put(net[i][j], new MyArrayList());
+                if (i + 1 < net.length && net[i + 1][j].getNumber()!=0) {
+                    //   adjlist.get(net[i][j]).add(net[i + 1][j]);
+                    adjlist.get(net[i][j]).add(net[i + 1][j]);
                 }
-                if (i - 1 >= 0) {
-                  //  adjlist.get(net[i][j]).add(net[i - 1][j]);
-                    adjlist2.get(net[i][j]).add(net[i - 1][j]);
+                if (i - 1 >= 0 && net[i - 1][j].getNumber()!=0) {
+                    //  adjlist.get(net[i][j]).add(net[i - 1][j]);
+                    adjlist.get(net[i][j]).add(net[i - 1][j]);
                 }
-                if (j + 1 < net.length) {
-                  //  adjlist.get(net[i][j]).add(net[i][j + 1]);
-                    adjlist2.get(net[i][j]).add(net[i][j + 1]);
+                if (j + 1 < net.length && net[i][j + 1].getNumber()!=0) {
+                    //  adjlist.get(net[i][j]).add(net[i][j + 1]);
+                    adjlist.get(net[i][j]).add(net[i][j + 1]);
                 }
-                if (j - 1 >= 0) {
-                  //  adjlist.get(net[i][j]).add(net[i][j - 1]);
-                    adjlist2.get(net[i][j]).add(net[i][j - 1]);
+                if (j - 1 >= 0 && net[i][j - 1].getNumber()!=0) {
+                    //  adjlist.get(net[i][j]).add(net[i][j - 1]);
+                    adjlist.get(net[i][j]).add(net[i][j - 1]);
                 }
             }
         }
-
     }
 //
 //    public Map<Node, ArrayList<Node>> getAdjList() {
 //        return adjlist;
 //    }
 
-    public Map<Node, MyArrayList> getAdjList() {
-        return adjlist2;
+    public Map<Node, MyArrayList<Node>> getAdjList() {
+        return adjlist;
     }
 }

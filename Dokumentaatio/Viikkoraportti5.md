@@ -1,0 +1,11 @@
+*Viikko 5
+
+3.10.16
+-1h polun tulostuksen selvittelyä, hieman lisätestejä MyStackille. 
+
+4.10.16
+-3h ohjelman parissa työskentelyä. Kävin pikaisesti ihmettelemässä ohjaajalle A*:rin outoa toimintaa (käy läpi "liikaa" solmuja), mutta ilmeni, että tämä johtuu vain siitä, missä järjestyksessä solmut lisätään vieruslistaan. Algoritmi toimii ok. IDA*:rin ongelmaa en saanut ratkaistua. Tein luokan tiedoston käsittelyyn ja tein MyArrayListista geneerisemmän (tosin toteutuksessa on hieman häikkää, ei varmaan paras tapa). 
+
+Verkon kokoaminen tiedostosta näyttää onnistuvan läpipääsemättömien seinien kohdalla (#), mutta painoltaan suuremmat, mutta muuten läpikuljettavat solmut (o) aiheuttavat ongelmia- Heap ei jotenkin pysty käsittelemään niitä niin, että algoritmi voisi jatkaa kulkuaan näiden painavien solmujen läpi, jossei muuta reittiä ole. En keksinyt järkevää tapaa solmujen endDist-arvon asettamiseksi ennen kuin koko verkko on käyty läpi ja loppusolmu löydetty, joten verkko käydään nyt kaksi kertaa läpi, mikä ei ole tietenkään optimaalista. 
+
+Testejä puuttuu useammalta luokalta, tuli niin paljon muutoksia. 

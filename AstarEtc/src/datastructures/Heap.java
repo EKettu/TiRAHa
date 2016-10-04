@@ -36,21 +36,25 @@ public class Heap {
         int right = right(i);
         int smallest = 0;
         if (right <= heapsize) {
-            if (table[left].getStartD() + table[left].getEndD()
-                    < table[right].getStartD() + table[right].getEndD()) {
+            if (table[left].getStartD() + table[left].getEndD() + table[left].getWeight()
+                    < table[right].getStartD() + table[right].getEndD() + 
+                    table[right].getWeight()) {
                 smallest = left;
             } else {
                 smallest = right;
             }
-            if (table[i].getStartD() + table[i].getEndD()
-                    > table[smallest].getStartD() + table[smallest].getEndD()) {
+            if (table[i].getStartD() + table[i].getEndD() + table[i].getWeight()
+                    > table[smallest].getStartD() + table[smallest].getEndD() + 
+                    table[smallest].getWeight()) {
                 Node temp = table[i];
                 table[i] = table[smallest];
                 table[smallest] = temp;
                 heapify(table, smallest);
             }
-        } else if (left == heapsize && table[i].getStartD() + table[i].getEndD()
-                > table[left].getStartD() + table[left].getEndD()) {
+        } else if (left == heapsize && table[i].getStartD() + table[i].getEndD() 
+                + table[i].getWeight()
+                > table[left].getStartD() + table[left].getEndD() + 
+                table[left].getWeight()) {
             Node temp = table[i];
             table[i] = table[left];
             table[left] = temp;

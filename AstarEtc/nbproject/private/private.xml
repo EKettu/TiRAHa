@@ -4,16 +4,21 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/src/datastructures/Heap.java</file>
-            <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/src/graph/Start.java</file>
+            <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/src/utilities/FileReader.java</file>
             <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/test/datastructures/MyStackTest.java</file>
+            <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/test/datastructures/MyArrayListTest.java</file>
             <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/test/graph/PathTest.java</file>
             <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/src/graph/Path.java</file>
+            <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/src/algorithms/IDAstar.java</file>
             <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/test/algorithms/AstarTest.java</file>
-            <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/test/graph/StartTest.java</file>
             <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/src/Main.java</file>
+            <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/test/graph/NetBuilderTest.java</file>
             <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/src/graph/Node.java</file>
+            <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/src/graph/NetBuilder.java</file>
             <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/src/datastructures/MyStack.java</file>
+            <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/test/algorithms/IDAstarTest.java</file>
             <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/src/algorithms/Astar.java</file>
+            <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/src/datastructures/MyArrayList.java</file>
             <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/test/graph/NodeTest.java</file>
             <file>file:/Users/elinakettunen/TiRAHa/AstarEtc/test/datastructures/HeapTest.java</file>
         </group>

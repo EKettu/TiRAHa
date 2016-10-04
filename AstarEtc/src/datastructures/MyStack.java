@@ -39,8 +39,8 @@ public class MyStack {
      * Method to add an integer into a stack
      */
     public void push(int x) {
-        top++;
         if (!full()) {
+            top++;
             table[top] = x;
         } else {
             System.out.println("The Stack is full.");

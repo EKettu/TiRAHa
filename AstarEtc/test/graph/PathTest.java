@@ -33,22 +33,22 @@ public class PathTest {
     public void tearDown() {
     }
 
-    @Test
-    public void pathLengthOk1() {
-        astar.astar(5, 0, 0, 3, 3);
-        assertEquals(6, path.getLength());
-    }
-
-    @Test
-    public void pathLengthOk2() {
-        astar.astar(100, 0, 0, 90, 90);
-        assertEquals(180, path.getLength());
-    }
-
-    @Test
-    public void pathLengthOk3() {
-        astar.astar(5, 0, 0, 0, 1);
-        assertEquals(1, path.getLength());
-    }
+//    @Test
+//    public void pathLengthOk1() {
+//        astar.astar(5, 0, 0, 3, 3);
+//        assertEquals(6, path.getLength());
+//    }
+//
+//    @Test
+//    public void pathLengthOk2() {
+//        astar.astar(100, 0, 0, 90, 90);
+//        assertEquals(180, path.getLength());
+//    }
+//
+//    @Test
+//    public void pathLengthOk3() {
+//        astar.astar(5, 0, 0, 0, 1);
+//        assertEquals(1, path.getLength());
+//    }
 
 }

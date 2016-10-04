@@ -32,10 +32,10 @@ public class AstarTest {
     public void tearDown() {
     }
 
-    @Test
-    public void adjacencyListRightSize() {
-        astar.astar(4, 0, 0, 3, 3);
-        assertEquals(16, astar.getAdjList().size());
-    }
+//    @Test
+//    public void adjacencyListRightSize() {
+//        astar.astar(4, 0, 0, 3, 3);
+//        assertEquals(16, astar.getAdjList().size());
+//    }
 
 }
