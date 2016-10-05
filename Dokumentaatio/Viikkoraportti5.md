@@ -9,3 +9,6 @@
 Verkon kokoaminen tiedostosta näyttää onnistuvan läpipääsemättömien seinien kohdalla (#), mutta painoltaan suuremmat, mutta muuten läpikuljettavat solmut (o) aiheuttavat ongelmia- Heap ei jotenkin pysty käsittelemään niitä niin, että algoritmi voisi jatkaa kulkuaan näiden painavien solmujen läpi, jossei muuta reittiä ole. En keksinyt järkevää tapaa solmujen endDist-arvon asettamiseksi ennen kuin koko verkko on käyty läpi ja loppusolmu löydetty, joten verkko käydään nyt kaksi kertaa läpi, mikä ei ole tietenkään optimaalista. 
 
 Testejä puuttuu useammalta luokalta, tuli niin paljon muutoksia. 
+
+5.10.16
+-0,5h A*:rin toiminnan ihmettelyä. Eilen raportoimani ongelma läpikuljettavien painavien solmujen kanssa johtui NetBuilderissa verkon luonnissa olleesta yhden numeron bugista, korjasin asian ja A* näyttää nyt toimivan ongelmitta. Pitää siivota koodia vielä huomattavasti, nyt Main-luokkaan kuuluvia operaatioita on turhaan Astar-luokassa. Ja tietenkin IDA* pitää korjata sekä korvata HashMap omalla rakenteella.

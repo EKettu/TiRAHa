@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class NetBuilderTest {
 
-    NetBuilder start;
+    NetBuilder netbuild;
 
     @BeforeClass
     public static void setUpClass() {
@@ -23,7 +23,7 @@ public class NetBuilderTest {
 
     @Before
     public void setUp() {
-        start = new NetBuilder();
+        netbuild = new NetBuilder();
     }
 
     @After
@@ -32,26 +32,26 @@ public class NetBuilderTest {
 
     @Test
     public void startNodeCoordinatesRight() {
-        Node[][] net = start.createNet(5, 0, 0, 4, 4);
-        assertTrue(net[0][0] == start.getStartNode());
+        Node[][] net = netbuild.createNet(5, 0, 0, 4, 4);
+        assertTrue(net[0][0] == netbuild.getStartNode());
     }
 
     @Test
     public void startNodeStartDistIsRight() {
-        Node[][] net = start.createNet(5, 0, 0, 4, 4);
-        assertEquals(start.getStartNode().getStartD(), 0);
+        Node[][] net = netbuild.createNet(5, 0, 0, 4, 4);
+        assertEquals(netbuild.getStartNode().getStartD(), 0);
     }
 
     @Test
     public void endNodeCoordinatesRight() {
-        Node[][] net = start.createNet(5, 0, 0, 4, 4);
-        assertTrue(net[4][4] == start.getEndNode());
+        Node[][] net = netbuild.createNet(5, 0, 0, 4, 4);
+        assertTrue(net[4][4] == netbuild.getEndNode());
     }
 
     @Test
     public void endNodeStartDistIsRight() {
-        Node[][] net = start.createNet(5, 0, 0, 4, 4);
-        assertEquals(start.getEndNode().getStartD(), Integer.MAX_VALUE);
+        Node[][] net = netbuild.createNet(5, 0, 0, 4, 4);
+        assertEquals(netbuild.getEndNode().getStartD(), Integer.MAX_VALUE);
     }
 
 }

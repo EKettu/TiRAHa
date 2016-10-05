@@ -79,7 +79,7 @@ public class NetBuilder {
                             Integer.MAX_VALUE);
                 }
                 if (row.charAt(j) == 'o') {
-                    net[i][j] = new Node(0, i, j, Integer.MAX_VALUE, 0, 10);
+                    net[i][j] = new Node(k, i, j, Integer.MAX_VALUE, 0, 10);
                 }
                 if (row.charAt(j) == '.') {
                     net[i][j] = new Node(k, i, j, Integer.MAX_VALUE, 0, 1);
