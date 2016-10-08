@@ -11,7 +11,6 @@ public class MyArrayList <E>{
     
     public MyArrayList()  {
         array = (E[])new Object[4];
-      //  E[] arr = (E[])new Object[4];
     }
     
     public E get(int index) {

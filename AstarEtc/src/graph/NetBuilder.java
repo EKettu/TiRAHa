@@ -60,6 +60,7 @@ public class NetBuilder {
         boolean startFound = false;
         boolean endFound = false;
         int k = 1;
+        System.out.println("Alkuperäinen verkko: ");
         Node[][] net = new Node[array.size()][array.size()]; //pitää olla neliönmallinen...
         for (int i = 0; i < array.size(); i++) {
             for (int j = 0; j < array.size(); j++) {
@@ -68,30 +69,37 @@ public class NetBuilder {
                     startFound = true;
                     startNode = new Node(k, i, j, 0, 0, 1);
                     net[i][j] = startNode;
+                    System.out.print("s ");
                 }
                 if (row.charAt(j) == 'e') {
                     endFound = true;
                     endNode = new Node(k, i, j, Integer.MAX_VALUE, 0, 1);
                     net[i][j] = endNode;
+                    System.out.print("e ");
                 }
                 if (row.charAt(j) == '#') {
                     net[i][j] = new Node(0, i, j, Integer.MAX_VALUE, Integer.MAX_VALUE,
                             Integer.MAX_VALUE);
+                    System.out.print("# ");
                 }
                 if (row.charAt(j) == 'o') {
                     net[i][j] = new Node(k, i, j, Integer.MAX_VALUE, 0, 10);
+                    System.out.print("o ");
                 }
                 if (row.charAt(j) == '.') {
                     net[i][j] = new Node(k, i, j, Integer.MAX_VALUE, 0, 1);
+                    System.out.print(". ");
                 }
                 k++;
             }
+            System.out.println("");
         }
 
         if (!startFound || !endFound) {
             System.out.println("Verkosta puuttuu alku- tai loppusolmu");
             return null;
         }
+        System.out.println("");
         setEndDistances(net);
         return net;
     }

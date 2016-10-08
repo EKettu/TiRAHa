@@ -139,4 +139,11 @@ public class Heap {
     public Node[] getNodeTable() {
         return table;
     }
+    
+    public boolean empty() {
+        if(heapsize <=0) {
+            return true;
+        }
+        return false;
+    }
 }

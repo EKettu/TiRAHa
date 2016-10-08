@@ -12,3 +12,6 @@ Testejä puuttuu useammalta luokalta, tuli niin paljon muutoksia.
 
 5.10.16
 -0,5h A*:rin toiminnan ihmettelyä. Eilen raportoimani ongelma läpikuljettavien painavien solmujen kanssa johtui NetBuilderissa verkon luonnissa olleesta yhden numeron bugista, korjasin asian ja A* näyttää nyt toimivan ongelmitta. Pitää siivota koodia vielä huomattavasti, nyt Main-luokkaan kuuluvia operaatioita on turhaan Astar-luokassa. Ja tietenkin IDA* pitää korjata sekä korvata HashMap omalla rakenteella.
+
+8.10.16
+-2h koodin siivousta ym. A* toimii nyt myös tilanteissa, joissa polkua ei löydy. IDA* ei toimi oikein, algoritmi käy läpi aivan liikaa solmuja (kaikki), lisäksi algoritmi ei toimi oikein A*:rin kanssa samaan aikaan käytettynä. HashMap on vielä korvaamatta, mutta muuten Javan tietorakenteet on korvattu omilla. Testejä pitää kirjoittaa lisää. 

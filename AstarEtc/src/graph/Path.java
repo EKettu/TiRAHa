@@ -11,7 +11,9 @@ public class Path {
      * length of the shortest path
      */
     private static int length;
-
+    /**
+     * 
+     */
     private static int[] nodePath;
 
     /**
@@ -25,9 +27,7 @@ public class Path {
         Node node2 = path.get(node);
         MyStack stack = new MyStack(path.size()+10);
         nodePath = new int[path.size()];
-        // Stack<Node> stack = new Stack<Node>();
         while (node2 != startNode) {
-            //  stack.push(node2);
             stack.push(node2.getNumber());
             node2 = path.get(node2);
         }
@@ -36,7 +36,6 @@ public class Path {
         System.out.print(startNode.getNumber() + " ");
         int k = 0;
         while (!stack.empty()) {
-            // Node node3= stack.pop();
             int x = stack.pop();
             nodePath[k] = x;
             k++;
@@ -57,12 +56,12 @@ public class Path {
      *
      * @param net Node[][], received as a parameter, the net of nodes
      */
-    public static void showPath(Node[][] net, HashSet<Node> visited, Node startNode, Node endNode) {
+    public static void showPath(Node[][] net, boolean[][] visited, Node startNode, Node endNode) {
         int k = 0;
         for (int i = 0; i < net.length; i++) {
             for (int j = 0; j < net.length; j++) {
 
-                if (visited.contains(net[i][j])) {
+                if (visited[i][j]) {
 
                     if (net[i][j].getNumber() == nodePath[k]) {
                         System.out.print("* ");
