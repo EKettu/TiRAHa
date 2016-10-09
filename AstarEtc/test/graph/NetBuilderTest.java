@@ -29,29 +29,29 @@ public class NetBuilderTest {
     @After
     public void tearDown() {
     }
-
-    @Test
-    public void startNodeCoordinatesRight() {
-        Node[][] net = netbuild.createNet(5, 0, 0, 4, 4);
-        assertTrue(net[0][0] == netbuild.getStartNode());
-    }
-
-    @Test
-    public void startNodeStartDistIsRight() {
-        Node[][] net = netbuild.createNet(5, 0, 0, 4, 4);
-        assertEquals(netbuild.getStartNode().getStartD(), 0);
-    }
-
-    @Test
-    public void endNodeCoordinatesRight() {
-        Node[][] net = netbuild.createNet(5, 0, 0, 4, 4);
-        assertTrue(net[4][4] == netbuild.getEndNode());
-    }
-
-    @Test
-    public void endNodeStartDistIsRight() {
-        Node[][] net = netbuild.createNet(5, 0, 0, 4, 4);
-        assertEquals(netbuild.getEndNode().getStartD(), Integer.MAX_VALUE);
-    }
+//
+//    @Test
+//    public void startNodeCoordinatesRight() {
+//        Node[][] net = netbuild.createNet(5, 0, 0, 4, 4);
+//        assertTrue(net[0][0] == netbuild.getStartNode());
+//    }
+//
+//    @Test
+//    public void startNodeStartDistIsRight() {
+//        Node[][] net = netbuild.createNet(5, 0, 0, 4, 4);
+//        assertEquals(netbuild.getStartNode().getStartD(), 0);
+//    }
+//
+//    @Test
+//    public void endNodeCoordinatesRight() {
+//        Node[][] net = netbuild.createNet(5, 0, 0, 4, 4);
+//        assertTrue(net[4][4] == netbuild.getEndNode());
+//    }
+//
+//    @Test
+//    public void endNodeStartDistIsRight() {
+//        Node[][] net = netbuild.createNet(5, 0, 0, 4, 4);
+//        assertEquals(netbuild.getEndNode().getStartD(), Integer.MAX_VALUE);
+//    }
 
 }

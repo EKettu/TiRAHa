@@ -1,6 +1,7 @@
 package graph;
 
 import datastructures.MyArrayList;
+import datastructures.MyHashMap;
 import graph.Node;
 import datastructures.MyStack;
 import java.util.*;
@@ -10,23 +11,25 @@ public class Path {
     /**
      * length of the shortest path
      */
-    private static int length;
+    private int length;
     /**
-     * 
+     *
      */
-    private static int[] nodePath;
+    private int[] nodePath;
 
     /**
      * Method to print the shortest path between two nodes
      *
-     * @param path HashMap, received as a parameter, contains the path between
+     * @param netsize, size of a net, received as a parameter
+     * @param path MyHashMap, received as a parameter, contains the path between
      * the start and the end
      * @param node Node, received as a parameter, the end node
+     * @param startNode Node, received as a parameter, the start node
      */
-    public static void shortestPath(HashMap<Node, Node> path, Node node, Node startNode) {
+    public void shortestPath(int netsize, MyHashMap<Node, Node> path, Node node, Node startNode) {
         Node node2 = path.get(node);
-        MyStack stack = new MyStack(path.size()+10);
-        nodePath = new int[path.size()];
+        MyStack stack = new MyStack(netsize);
+        nodePath = new int[netsize];
         while (node2 != startNode) {
             stack.push(node2.getNumber());
             node2 = path.get(node2);
@@ -55,8 +58,11 @@ public class Path {
      * nodes (and the actual shortest path)
      *
      * @param net Node[][], received as a parameter, the net of nodes
+     * @param visited boolean[][], received as a parameter, tells if node is visited
+     * @param startNode Node, received as a parameter, the start node
+     * @param endNode Node, received as a parameter, the end node
      */
-    public static void showPath(Node[][] net, boolean[][] visited, Node startNode, Node endNode) {
+    public void showPath(Node[][] net, boolean[][] visited, Node startNode, Node endNode) {
         int k = 0;
         for (int i = 0; i < net.length; i++) {
             for (int j = 0; j < net.length; j++) {
@@ -73,11 +79,9 @@ public class Path {
                     } else {
                         System.out.print("x ");
                     }
-                } 
-                else if (net[i][j].getNumber()==0) {
+                } else if (net[i][j].getNumber() == 0) {
                     System.out.print("# ");
-                }
-                else {
+                } else {
                     System.out.print(". ");
                 }
             }

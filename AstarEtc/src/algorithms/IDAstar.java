@@ -4,6 +4,7 @@ import graph.Path;
 import graph.Node;
 import datastructures.Heap;
 import datastructures.MyArrayList;
+import datastructures.MyHashMap;
 import java.util.*;
 
 public class IDAstar {
@@ -15,7 +16,7 @@ public class IDAstar {
     /**
      * map containing the adjacent nodes
      */
-    private Map<Node, MyArrayList<Node>> adjlist;
+    private MyHashMap<Node, MyArrayList<Node>> adjlist;
     /**
      * tells if endNode has been found
      */
@@ -23,7 +24,7 @@ public class IDAstar {
     /**
      * a map of nodes on the path
      */
-    private HashMap<Node, Node> path;
+    private MyHashMap<Node, Node> path;
 
     /**
      * IDA* algorithm, calculates the shortest path between two nodes
@@ -34,8 +35,9 @@ public class IDAstar {
      */
     public void idastar(Node[][] net, Node startNode, Node endNode) {
         visited = new boolean[net.length][net.length];
-        path = new HashMap<Node, Node>();
+        path = new MyHashMap<Node, Node>();
         found = false;
+        int netsize = net.length*net.length;
 
         createAdjList(net);
 
@@ -48,7 +50,7 @@ public class IDAstar {
         }
         if (found) {
             Path path2 = new Path();
-            path2.shortestPath(path, endNode, startNode);
+            path2.shortestPath(netsize, path, endNode, startNode);
             path2.showPath(net, visited, startNode, endNode);
         }
 
@@ -91,7 +93,7 @@ public class IDAstar {
      * net
      */
     private void createAdjList(Node[][] net) {
-        adjlist = new HashMap<Node, MyArrayList<Node>>();
+        adjlist = new MyHashMap<Node, MyArrayList<Node>>();
         for (int i = 0; i < net.length; i++) {
             for (int j = 0; j < net.length; j++) {
                 adjlist.put(net[i][j], new MyArrayList());
@@ -111,7 +113,7 @@ public class IDAstar {
         }
     }
 
-    public Map<Node, MyArrayList<Node>> getAdjList() {
+    public MyHashMap<Node, MyArrayList<Node>> getAdjList() {
         return adjlist;
     }
 

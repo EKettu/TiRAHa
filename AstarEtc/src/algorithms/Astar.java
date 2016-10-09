@@ -4,6 +4,7 @@ import graph.Path;
 import graph.Node;
 import datastructures.Heap;
 import datastructures.MyArrayList;
+import datastructures.MyHashMap;
 import java.util.*;
 
 public class Astar {
@@ -11,7 +12,7 @@ public class Astar {
     /**
      * a map containing the adjacent nodes
      */
-    private Map<Node, MyArrayList<Node>> adjlist;
+    private MyHashMap<Node, MyArrayList<Node>> adjlist;
     /**
      * a matrix of nodes already visited
      */
@@ -27,9 +28,11 @@ public class Astar {
     public void astar(Node[][] net, Node startNode, Node endNode) {
         visited = new boolean[net.length][net.length];
         boolean found = false;
-        HashMap<Node, Node> path = new HashMap<Node, Node>();
+        MyHashMap<Node, Node> path = new MyHashMap<Node, Node>();
         Heap heap = new Heap(net.length);
         Node[] table = new Node[net.length * net.length];
+        
+        int netsize = net.length*net.length;
 
         createAdjList(net);
         heap.heapInsert(table, startNode);
@@ -57,7 +60,7 @@ public class Astar {
         }
         if (found) {
             Path path2 = new Path();
-            path2.shortestPath(path, endNode, startNode);
+            path2.shortestPath(netsize, path, endNode, startNode);
             path2.showPath(net, visited, startNode, endNode);
         }
     }
@@ -69,7 +72,7 @@ public class Astar {
      * net
      */
     private void createAdjList(Node[][] net) {
-        adjlist = new HashMap<Node, MyArrayList<Node>>();
+        adjlist = new MyHashMap<Node, MyArrayList<Node>>();
         for (int i = 0; i < net.length; i++) {
             for (int j = 0; j < net.length; j++) {
                 adjlist.put(net[i][j], new MyArrayList());
@@ -89,7 +92,7 @@ public class Astar {
         }
     }
 
-    public Map<Node, MyArrayList<Node>> getAdjList() {
+    public MyHashMap<Node, MyArrayList<Node>> getAdjList() {
         return adjlist;
     }
 }

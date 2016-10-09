@@ -8,8 +8,12 @@ import java.util.Scanner;
 
 public class FileReader {
     
-    
-    public static MyArrayList readNetFromFile(File file) {
+    /**
+     * Method to read a net of nodes from a file
+     * @param file File, received as a parameter, contains the net
+     * @return MyArrayList containing the net as strings
+     */   
+    public MyArrayList readNetFromFile(File file) {
         MyArrayList stringArray = new MyArrayList();
         
         try {

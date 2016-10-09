@@ -140,6 +140,10 @@ public class Heap {
         return table;
     }
     
+    /**
+     * Method to check if the heap is empty
+     * @return true if empty
+     */
     public boolean empty() {
         if(heapsize <=0) {
             return true;

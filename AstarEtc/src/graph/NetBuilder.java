@@ -14,48 +14,53 @@ public class NetBuilder {
      */
     private static Node endNode;
 
-    /**
-     * Creates a matrix/net of nodes and sets the start and end distances for
-     * all nodes including start node and end node
-     *
-     * @param n integer, received as a parameter, the size of the node matrix
-     * @param startY integer, received as a parameter, y coordinate of the start
-     * node
-     * @param startX integer, received as a parameter, x coordinate of the start
-     * node
-     * @param endY integer, received as a parameter, y coordinate of the end
-     * node
-     * @param endX integer, received as a parameter, x coordinate of the end
-     * node
-     * @return
-     */
-    public static Node[][] createNet(int n, int startY, int startX, int endY, int endX) {
-        if (startY > n - 1 || startX > n - 1 || endY > n - 1 || endX > n - 1) {
-            System.out.println("Koordinaatit ovat verkon ulkopuolella");
-            return null;
-        } else {
-            Node[][] net = new Node[n][n];
-            int k = 1;
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < n; j++) {
-                    if (i == startY && j == startX) {
-                        startNode = new Node(k, i, j, 0, Math.abs(i - endY) + Math.abs(j - endX), 1);
-                        net[i][j] = startNode;
-                    } else if (i == endY && j == endX) {
-                        endNode = new Node(k, i, j, Integer.MAX_VALUE, Math.abs(i - endY) + Math.abs(j - endX), 1);
-                        net[i][j] = endNode;
-                    } else {
-                        net[i][j] = new Node(k, i, j, Integer.MAX_VALUE, Math.abs(i - endY) + Math.abs(j - endX), 1);
-                    }
-                    k++;
-                    // System.out.print(net[i][j].getNumber() + " ");
-                        }
-                System.out.println("");
-                     }
-            return net;
-        }
-    }
+//    /**
+//     * Creates a matrix/net of nodes and sets the start and end distances for
+//     * all nodes including start node and end node
+//     *
+//     * @param n integer, received as a parameter, the size of the node matrix
+//     * @param startY integer, received as a parameter, y coordinate of the start
+//     * node
+//     * @param startX integer, received as a parameter, x coordinate of the start
+//     * node
+//     * @param endY integer, received as a parameter, y coordinate of the end
+//     * node
+//     * @param endX integer, received as a parameter, x coordinate of the end
+//     * node
+//     * @return
+//     */
+//    public static Node[][] createNet(int n, int startY, int startX, int endY, int endX) {
+//        if (startY > n - 1 || startX > n - 1 || endY > n - 1 || endX > n - 1) {
+//            System.out.println("Koordinaatit ovat verkon ulkopuolella");
+//            return null;
+//        } else {
+//            Node[][] net = new Node[n][n];
+//            int k = 1;
+//            for (int i = 0; i < n; i++) {
+//                for (int j = 0; j < n; j++) {
+//                    if (i == startY && j == startX) {
+//                        startNode = new Node(k, i, j, 0, Math.abs(i - endY) + Math.abs(j - endX), 1);
+//                        net[i][j] = startNode;
+//                    } else if (i == endY && j == endX) {
+//                        endNode = new Node(k, i, j, Integer.MAX_VALUE, Math.abs(i - endY) + Math.abs(j - endX), 1);
+//                        net[i][j] = endNode;
+//                    } else {
+//                        net[i][j] = new Node(k, i, j, Integer.MAX_VALUE, Math.abs(i - endY) + Math.abs(j - endX), 1);
+//                    }
+//                    k++;
+//                    // System.out.print(net[i][j].getNumber() + " ");
+//                        }
+//                System.out.println("");
+//                     }
+//            return net;
+//        }
+//    }
 
+    /**
+     * Method to create a net from an array received
+     * @param array MyArrayList, received as a parameter, contains the net as strings
+     * @return a net of nodes in an array
+     */
     public static Node[][] createNetFromArray(MyArrayList array) {
         boolean startFound = false;
         boolean endFound = false;
@@ -104,6 +109,10 @@ public class NetBuilder {
         return net;
     }
 
+    /**
+     * Method to set the distances of all nodes from the end node 
+     * @param net Node[][], received as a parameter, the net of nodes
+     */
     private static void setEndDistances(Node[][] net) {
       //  System.out.println("Verkon solmujen numerot ");
         for (int i = 0; i < net.length; i++) {          //taas pitää olla neliöitä
@@ -115,11 +124,11 @@ public class NetBuilder {
         }
     }
 
-    public Node getStartNode() {
+    public static Node getStartNode() {
         return startNode;
     }
 
-    public Node getEndNode() {
+    public static Node getEndNode() {
         return endNode;
     }
 }
