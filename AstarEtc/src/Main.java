@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
         NetBuilder netbuild = new NetBuilder();
         FileReader filereader = new FileReader();
-        MyArrayList netArray = filereader.readNetFromFile(new File("test.txt"));
+        MyArrayList netArray = filereader.readNetFromFile(new File("map10_1.txt"));
 
         Node[][] net = netbuild.createNetFromArray(netArray);
         Node startNode = netbuild.getStartNode();
@@ -27,10 +27,13 @@ public class Main {
         astar.astar(net, startNode, endNode);
         System.out.println("Aikaa kului " + (System.currentTimeMillis() - timestamp) + " ms");
         System.out.println("");
-
-        System.out.println("IDA*");
-        IDAstar idastar = new IDAstar();
-        idastar.idastar(net, startNode, endNode);
+        
+//        net = netbuild.createNetFromArray(netArray);
+//        startNode = netbuild.getStartNode();
+//        endNode = netbuild.getEndNode();
+//        System.out.println("IDA*");
+//        IDAstar idastar = new IDAstar();
+//        idastar.idastar(net, startNode, endNode);
 
     }
 }

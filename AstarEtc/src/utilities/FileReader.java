@@ -1,5 +1,4 @@
 
-
 package utilities;
 
 import datastructures.MyArrayList;
@@ -25,6 +24,7 @@ public class FileReader {
         }
         catch(Exception e) {
             System.out.println("Error in reading the file");
+            return null;
         }
         
         return stringArray;

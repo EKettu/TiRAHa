@@ -54,9 +54,6 @@ public class MyArrayList <E>{
         return arraySize;
     }
     
-//    public Object remove(int index) {
-//        
-//    }
     /**
      * increases the size of a list
      */

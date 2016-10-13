@@ -2,6 +2,7 @@ package graph;
 
 import datastructures.MyArrayList;
 import datastructures.MyHashMap;
+import datastructures.MyHashSet;
 import graph.Node;
 import datastructures.MyStack;
 import java.util.*;
@@ -13,9 +14,9 @@ public class Path {
      */
     private int length;
     /**
-     *
+     * set that contains numbers of the nodes on the shortest path
      */
-    private int[] nodePath;
+    private MyHashSet<Integer> nodePath;
 
     /**
      * Method to print the shortest path between two nodes
@@ -29,19 +30,18 @@ public class Path {
     public void shortestPath(int netsize, MyHashMap<Node, Node> path, Node node, Node startNode) {
         Node node2 = path.get(node);
         MyStack stack = new MyStack(netsize);
-        nodePath = new int[netsize];
+        nodePath = new MyHashSet<Integer>();
         while (node2 != startNode) {
             stack.push(node2.getNumber());
             node2 = path.get(node2);
+         
         }
         length = 0;
         System.out.println("Polku koostuu solmuista : ");
         System.out.print(startNode.getNumber() + " ");
-        int k = 0;
         while (!stack.empty()) {
             int x = stack.pop();
-            nodePath[k] = x;
-            k++;
+            nodePath.add(x);
             System.out.print(x + " ");
             length++;
         }
@@ -58,20 +58,18 @@ public class Path {
      * nodes (and the actual shortest path)
      *
      * @param net Node[][], received as a parameter, the net of nodes
-     * @param visited boolean[][], received as a parameter, tells if node is visited
+     * @param visited boolean[][], received as a parameter, tells if node is
+     * visited
      * @param startNode Node, received as a parameter, the start node
      * @param endNode Node, received as a parameter, the end node
      */
     public void showPath(Node[][] net, boolean[][] visited, Node startNode, Node endNode) {
-        int k = 0;
+        
         for (int i = 0; i < net.length; i++) {
             for (int j = 0; j < net.length; j++) {
-
                 if (visited[i][j]) {
-
-                    if (net[i][j].getNumber() == nodePath[k]) {
+                    if (nodePath.contains(net[i][j].getNumber())) {
                         System.out.print("* ");
-                        k++;
                     } else if (net[i][j] == startNode) {
                         System.out.print("s ");
                     } else if (net[i][j] == endNode) {

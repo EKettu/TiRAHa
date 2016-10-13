@@ -84,6 +84,28 @@ public class MyHashMap <K, V> {
     }
     
     /**
+     * Method to check if the hashmap contains a certain key
+     * @param key, received as a parameter, the searched key
+     * @return the key that was searched
+     */   
+    public K contains(K key) {
+        int hash = hash(key);
+        if(table[hash] ==null) {
+            return null;
+        } else {
+            Entry<K, V> temp = table[hash];
+            while(temp!=null){
+                if(temp.key.equals(key)) {
+                    return key;
+                }
+                temp = temp.next;
+            }
+            return null;
+        }
+        
+    }
+    
+    /**
      * Method to implement hashing function, used to find a location to store
      * key-value-pairs
      * @param key, a key to which hash value is calculated

@@ -20,12 +20,27 @@ public class IDAstar {
     /**
      * tells if endNode has been found
      */
-    private boolean found;
+    //  private boolean found;
+    
     /**
      * a map of nodes on the path
      */
     private MyHashMap<Node, Node> path;
+    
+    /**
+     * Number of the endNode
+     */
+    private int found;
+    
+    /**
+     * End point of the search
+     */
+    private Node endNode;
+    
 
+    //Ei toimi...
+    
+    
     /**
      * IDA* algorithm, calculates the shortest path between two nodes
      *
@@ -34,56 +49,71 @@ public class IDAstar {
      * @param endNode, end point of the search
      */
     public void idastar(Node[][] net, Node startNode, Node endNode) {
+        this.endNode = endNode;
         visited = new boolean[net.length][net.length];
         path = new MyHashMap<Node, Node>();
-        found = false;
-        int netsize = net.length*net.length;
-
+        int netsize = net.length * net.length;
+        found = endNode.getNumber();
         createAdjList(net);
 
-        while (!found) {
-            DFS(net, startNode, endNode);
-            if (!found) {
-                System.out.println("Polkua ei löydy. ");
+        int threshold = startNode.getStartD();
+
+        while (true) {
+            int temp = search(startNode, 0, threshold);
+            System.out.println("temp on " + temp);
+            if (temp == found) {
+                System.out.println("Polku löytyi");
+//                Path path2 = new Path();
+//                path2.shortestPath(netsize, path, endNode, startNode);
+//                path2.showPath(net, visited, startNode, endNode);
                 break;
             }
-        }
-        if (found) {
-            Path path2 = new Path();
-            path2.shortestPath(netsize, path, endNode, startNode);
-            path2.showPath(net, visited, startNode, endNode);
-        }
 
+            if (temp > 100) { 
+                System.out.println("Polkua ei löydy");
+                break;
+            }
+             System.out.println("temp on " + temp);
+            threshold = temp;
+        }
     }
 
-    /**
-     * Depth-First-Search algorithm
-     *
-     * @param net Node[][], received as a parameter, the net of nodes
-     * @param node Node, received as a parameter, starting point of DFS
-     * @param endNode Node, received as a parameter, end point of DFS
-     */
-    private void DFS(Node[][] net, Node node, Node endNode) {
+    private Integer search(Node node, int g, int threshold) {
+        System.out.println("node on " + node.getNumber());
         visited[node.getY()][node.getX()] = true;
-        // System.out.println("endNode on " + endNode);
-        for (int i = 0; i < adjlist.get(node).size(); i++) {
-            Node adjNode = (Node) adjlist.get(node).get(i);
-            //   System.out.println("adjNode on " + adjNode);
-            if (!visited[adjNode.getY()][adjNode.getX()]) {
-                if (adjNode == endNode) {
-                    visited[adjNode.getY()][adjNode.getX()] = true;
-                    path.put(adjNode, node);
-                    found = true;
-                    break;
-                }
-                if (adjNode.getStartD() > node.getStartD() + adjNode.getWeight()) {
-                    adjNode.setStartD(node.getStartD() + adjNode.getWeight());
-                    DFS(net, adjNode, endNode);
-                }
-            }
-            visited[adjNode.getY()][adjNode.getX()] = true;
-            path.put(adjNode, node);
+        int f = g + node.getStartD() + node.getEndD();
+        System.out.println("threshold on " + threshold);
+        if (f > threshold) {
+            return f;
         }
+
+        if (node == endNode) {
+            System.out.println("loppusolmu löydetty");
+            return found;
+        }
+        int min = Integer.MAX_VALUE;
+
+        for (int i = 0; i < adjlist.get(node).size(); i++) {
+            Node adjNode = adjlist.get(node).get(i);
+            if (adjNode.getStartD() > node.getStartD() + adjNode.getWeight()) {
+                    adjNode.setStartD(node.getStartD() + adjNode.getWeight());
+            }
+            System.out.println("adjNode.getNumber on " + adjNode.getNumber());
+            System.out.println("adjNode.getStartD on " + adjNode.getStartD());
+            int temp = search(adjNode, g + node.getStartD()+adjNode.getWeight(), threshold);
+
+            if (temp == found) {
+                return found;
+            }
+            if (temp < min) {
+                min = temp;
+            }
+            path.put(adjNode, node);
+            visited[adjNode.getY()][adjNode.getX()] = true;
+        }
+
+        return min;
+
     }
 
     /**
@@ -116,5 +146,5 @@ public class IDAstar {
     public MyHashMap<Node, MyArrayList<Node>> getAdjList() {
         return adjlist;
     }
-
+    
 }

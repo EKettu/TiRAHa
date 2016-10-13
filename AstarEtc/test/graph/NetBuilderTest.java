@@ -8,10 +8,15 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import datastructures.MyArrayList;
+import java.io.File;
+import utilities.FileReader;
+
 
 public class NetBuilderTest {
 
     NetBuilder netbuild;
+    FileReader filereader;
 
     @BeforeClass
     public static void setUpClass() {
@@ -24,17 +29,20 @@ public class NetBuilderTest {
     @Before
     public void setUp() {
         netbuild = new NetBuilder();
+        filereader = new FileReader();
     }
 
     @After
     public void tearDown() {
     }
-//
-//    @Test
-//    public void startNodeCoordinatesRight() {
-//        Node[][] net = netbuild.createNet(5, 0, 0, 4, 4);
-//        assertTrue(net[0][0] == netbuild.getStartNode());
-//    }
+
+    @Test
+    public void createNetWorks() {
+        File file = new File("test_small1.txt");
+        MyArrayList array = filereader.readNetFromFile(file);
+        Node[][] net = netbuild.createNetFromArray(array);
+        assertFalse(net==null);   
+    }
 //
 //    @Test
 //    public void startNodeStartDistIsRight() {
