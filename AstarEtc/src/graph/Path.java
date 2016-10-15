@@ -69,7 +69,7 @@ public class Path {
             for (int j = 0; j < net.length; j++) {
                 if (visited[i][j]) {
                     if (nodePath.contains(net[i][j].getNumber())) {
-                        System.out.print("* ");
+                        System.out.print("@ ");
                     } else if (net[i][j] == startNode) {
                         System.out.print("s ");
                     } else if (net[i][j] == endNode) {
@@ -79,7 +79,11 @@ public class Path {
                     }
                 } else if (net[i][j].getNumber() == 0) {
                     System.out.print("# ");
-                } else {
+                } 
+                else if (net[i][j].getWeight()>1) {
+                    System.out.print("o ");
+                }
+                else {
                     System.out.print(". ");
                 }
             }

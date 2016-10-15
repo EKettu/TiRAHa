@@ -20,7 +20,7 @@ public class IDAstar {
     /**
      * tells if endNode has been found
      */
-    //  private boolean found;
+      private boolean found2;
     
     /**
      * a map of nodes on the path
@@ -30,7 +30,7 @@ public class IDAstar {
     /**
      * Number of the endNode
      */
-    private int found;
+ //   private int found;
     
     /**
      * End point of the search
@@ -53,43 +53,50 @@ public class IDAstar {
         visited = new boolean[net.length][net.length];
         path = new MyHashMap<Node, Node>();
         int netsize = net.length * net.length;
-        found = endNode.getNumber();
+        found2 = false;
+    //    found = endNode.getNumber();
         createAdjList(net);
 
         int threshold = startNode.getStartD();
 
         while (true) {
             int temp = search(startNode, 0, threshold);
-            System.out.println("temp on " + temp);
-            if (temp == found) {
+            if (found2) {
                 System.out.println("Polku löytyi");
+                printVisited(net.length);
 //                Path path2 = new Path();
 //                path2.shortestPath(netsize, path, endNode, startNode);
 //                path2.showPath(net, visited, startNode, endNode);
                 break;
             }
 
-            if (temp > 100) { 
+            if (temp > Integer.MAX_VALUE) { 
                 System.out.println("Polkua ei löydy");
                 break;
             }
-             System.out.println("temp on " + temp);
             threshold = temp;
+        }
+    }
+    
+    private void printVisited(int n) {
+        for(int i = 0; i < n; i++ ) {
+            for (int j = 0; j< n; j++) {
+                System.out.print(visited[i][j] + " ");
+            }
+            System.out.println("");
         }
     }
 
     private Integer search(Node node, int g, int threshold) {
-        System.out.println("node on " + node.getNumber());
         visited[node.getY()][node.getX()] = true;
-        int f = g + node.getStartD() + node.getEndD();
-        System.out.println("threshold on " + threshold);
+        int f = g + node.getStartD()+node.getWeight()+node.getEndD();
         if (f > threshold) {
             return f;
         }
 
         if (node == endNode) {
-            System.out.println("loppusolmu löydetty");
-            return found;
+            found2 = true;
+         //   return found;
         }
         int min = Integer.MAX_VALUE;
 
@@ -98,13 +105,11 @@ public class IDAstar {
             if (adjNode.getStartD() > node.getStartD() + adjNode.getWeight()) {
                     adjNode.setStartD(node.getStartD() + adjNode.getWeight());
             }
-            System.out.println("adjNode.getNumber on " + adjNode.getNumber());
-            System.out.println("adjNode.getStartD on " + adjNode.getStartD());
-            int temp = search(adjNode, g + node.getStartD()+adjNode.getWeight(), threshold);
+            int temp = search(adjNode, g + adjNode.getStartD()+adjNode.getEndD(), threshold);
 
-            if (temp == found) {
-                return found;
-            }
+//            if (temp == found) {
+//                return found;
+//            }
             if (temp < min) {
                 min = temp;
             }

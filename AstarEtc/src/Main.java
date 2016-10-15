@@ -15,25 +15,25 @@ public class Main {
     public static void main(String[] args) {
         NetBuilder netbuild = new NetBuilder();
         FileReader filereader = new FileReader();
-        MyArrayList netArray = filereader.readNetFromFile(new File("map10_1.txt"));
+        MyArrayList netArray = filereader.readNetFromFile(new File("map10_2.txt"));
 
         Node[][] net = netbuild.createNetFromArray(netArray);
         Node startNode = netbuild.getStartNode();
         Node endNode = netbuild.getEndNode();
-
-        Astar astar = new Astar();
-        long timestamp = System.currentTimeMillis();
-        System.out.println("A*");
-        astar.astar(net, startNode, endNode);
-        System.out.println("Aikaa kului " + (System.currentTimeMillis() - timestamp) + " ms");
-        System.out.println("");
-        
-//        net = netbuild.createNetFromArray(netArray);
-//        startNode = netbuild.getStartNode();
+//
+//        Astar astar = new Astar();
+//        long timestamp = System.currentTimeMillis();
+//        System.out.println("A*");
+//        astar.astar(net, startNode, endNode);
+//        System.out.println("Aikaa kului " + (System.currentTimeMillis() - timestamp) + " ms");
+//        System.out.println("");
+//        
+//        net = netbuild.createNetFromArray(netArray);  //jos A*:in ja IDA*:in haluaa ajaa  peräkkäin
+//        startNode = netbuild.getStartNode();          // pitää tehdä nämä
 //        endNode = netbuild.getEndNode();
-//        System.out.println("IDA*");
-//        IDAstar idastar = new IDAstar();
-//        idastar.idastar(net, startNode, endNode);
+        System.out.println("IDA*");
+        IDAstar idastar = new IDAstar();
+        idastar.idastar(net, startNode, endNode);
 
     }
 }

@@ -18,7 +18,9 @@ public class FileReader {
         try {
         Scanner scanner = new Scanner(file);
         while(scanner.hasNextLine()) {
-            stringArray.add(scanner.nextLine());
+            String string = scanner.nextLine();
+            stringArray.add(string);
+          //  System.out.println("scanner.nextLine on " + string);
         }
         scanner.close();
         }
