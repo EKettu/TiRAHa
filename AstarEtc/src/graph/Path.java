@@ -29,25 +29,24 @@ public class Path {
      */
     public void shortestPath(int netsize, MyHashMap<Node, Node> path, Node node, Node startNode) {
         Node node2 = path.get(node);
+        length = 0 + node2.getWeight();
         MyStack stack = new MyStack(netsize);
         nodePath = new MyHashSet<Integer>();
         while (node2 != startNode) {
             stack.push(node2.getNumber());
             node2 = path.get(node2);
-         
+            length = length + node2.getWeight();
         }
-        length = 0;
+
         System.out.println("Polku koostuu solmuista : ");
         System.out.print(startNode.getNumber() + " ");
         while (!stack.empty()) {
             int x = stack.pop();
             nodePath.add(x);
             System.out.print(x + " ");
-            length++;
         }
 
         System.out.print(node.getNumber());
-        length++;
         System.out.println("");
         System.out.println("Polun pituus on " + length);
 
@@ -64,7 +63,7 @@ public class Path {
      * @param endNode Node, received as a parameter, the end node
      */
     public void showPath(Node[][] net, boolean[][] visited, Node startNode, Node endNode) {
-        
+
         for (int i = 0; i < net.length; i++) {
             for (int j = 0; j < net.length; j++) {
                 if (visited[i][j]) {
@@ -79,11 +78,9 @@ public class Path {
                     }
                 } else if (net[i][j].getNumber() == 0) {
                     System.out.print("# ");
-                } 
-                else if (net[i][j].getWeight()>1) {
+                } else if (net[i][j].getWeight() > 1) {
                     System.out.print("o ");
-                }
-                else {
+                } else {
                     System.out.print(". ");
                 }
             }
@@ -92,6 +89,6 @@ public class Path {
     }
 
     public int getLength() {
-        return length;
+        return this.length;
     }
 }

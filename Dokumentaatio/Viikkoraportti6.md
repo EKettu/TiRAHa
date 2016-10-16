@@ -12,5 +12,6 @@
 15.10.16
 -4h ohjelman parissa työskentelyä. Verkot sisältävien tekstitiedostojen kanssa oli ongelmia, ja huomasin, että A* toimii aivan liian hitaasti jo 200x200 solmua sisältävien verkkojen kohdalla, 500x500 homma on jo aivan mahdotonta. En osaa sanoa mistä tämä johtuu. IDA* ei ole juurikaan edennyt, se on tuhottoman hidas ja käy läpi liian monta solmua. En myöskään tiedä miten oikean polun saisi IDA*:rin kohdalla talletettua järkevästi niin, että Path voisi käsitellä sen. 
 
-
+16.10.16
+-3,5h ohjelman parissa työskentelyä. En ole keksinyt syytä A*:in hitauteen (esim. vieruslistan teko kestää tuhottoman kauan), eikä IDA*:in ongelma ratkennut. Tein hieman lisää testejä sekä siirsin vieruslistojen teon NetBuilder-luokkaan. NetBuidler käy ehkä turhaan verkon läpi tällä hetkellä kolmeen kertaan, vieruslistan teon ja endDistancen asetuksen voisi varmaan vielä yhdistää. Tekstikäyttöliittymä on vielä tekemättä. 
 

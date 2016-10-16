@@ -2,17 +2,22 @@ package graph;
 
 import graph.Path;
 import algorithms.Astar;
+import datastructures.MyArrayList;
+import java.io.File;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import utilities.FileReader;
 
 public class PathTest {
 
     Path path;
     Astar astar;
+    NetBuilder netbuild;
+    FileReader filereader;
 
     @BeforeClass
     public static void setUpClass() {
@@ -26,6 +31,8 @@ public class PathTest {
     public void setUp() {
         path = new Path();
         astar = new Astar();
+        netbuild = new NetBuilder();
+        filereader = new FileReader();
 
     }
 
@@ -33,22 +40,14 @@ public class PathTest {
     public void tearDown() {
     }
 
-//    @Test
-//    public void pathLengthOk1() {
-//        astar.astar(5, 0, 0, 3, 3);
-//        assertEquals(6, path.getLength());
-//    }
-//
-//    @Test
-//    public void pathLengthOk2() {
-//        astar.astar(100, 0, 0, 90, 90);
-//        assertEquals(180, path.getLength());
-//    }
-//
-//    @Test
-//    public void pathLengthOk3() {
-//        astar.astar(5, 0, 0, 0, 1);
-//        assertEquals(1, path.getLength());
-//    }
+    @Test
+    public void pathLengthOk() {
+        File file = new File("test2.txt");
+        MyArrayList array = filereader.readNetFromFile(file);
+        Node[][] net = netbuild.createNetFromArray(array);
+        astar.astar(net, netbuild.getStartNode(), netbuild.getEndNode(), netbuild.getAdjList());
+        path.shortestPath(net.length * net.length, astar.getPath(), netbuild.getEndNode(), netbuild.getStartNode());
+        assertEquals(18, path.getLength());
+    }
 
 }

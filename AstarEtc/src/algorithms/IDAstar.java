@@ -20,27 +20,23 @@ public class IDAstar {
     /**
      * tells if endNode has been found
      */
-      private boolean found2;
-    
+    private boolean found2;
+
     /**
      * a map of nodes on the path
      */
     private MyHashMap<Node, Node> path;
-    
+
     /**
      * Number of the endNode
      */
  //   private int found;
-    
     /**
      * End point of the search
      */
     private Node endNode;
-    
 
     //Ei toimi...
-    
-    
     /**
      * IDA* algorithm, calculates the shortest path between two nodes
      *
@@ -48,14 +44,14 @@ public class IDAstar {
      * @param startNode, starting point of the search
      * @param endNode, end point of the search
      */
-    public void idastar(Node[][] net, Node startNode, Node endNode) {
+    public void idastar(Node[][] net, Node startNode, Node endNode, MyHashMap<Node, MyArrayList<Node>> adjlist) {
         this.endNode = endNode;
+        this.adjlist = adjlist;
         visited = new boolean[net.length][net.length];
         path = new MyHashMap<Node, Node>();
         int netsize = net.length * net.length;
         found2 = false;
-    //    found = endNode.getNumber();
-        createAdjList(net);
+        //    found = endNode.getNumber();
 
         int threshold = startNode.getStartD();
 
@@ -70,42 +66,41 @@ public class IDAstar {
                 break;
             }
 
-            if (temp > Integer.MAX_VALUE) { 
+            if (temp > Integer.MAX_VALUE) {
                 System.out.println("Polkua ei löydy");
                 break;
             }
             threshold = temp;
         }
     }
-    
-    private void printVisited(int n) {
-        for(int i = 0; i < n; i++ ) {
-            for (int j = 0; j< n; j++) {
-                System.out.print(visited[i][j] + " ");
-            }
-            System.out.println("");
-        }
-    }
 
+    /**
+     * Depth-First-Search algorithm
+     *
+     * @param node Node, received as a parameter, current node being searched
+     * @param g Integer, received as a parameter, cost of a node
+     * @param threshold Integer, received as a parameter, depth being searched
+     * @return
+     */
     private Integer search(Node node, int g, int threshold) {
         visited[node.getY()][node.getX()] = true;
-        int f = g + node.getStartD()+node.getWeight()+node.getEndD();
+        int f = g + node.getStartD() + node.getWeight() + node.getEndD();
         if (f > threshold) {
             return f;
         }
 
         if (node == endNode) {
             found2 = true;
-         //   return found;
+            //   return found;
         }
         int min = Integer.MAX_VALUE;
 
         for (int i = 0; i < adjlist.get(node).size(); i++) {
             Node adjNode = adjlist.get(node).get(i);
             if (adjNode.getStartD() > node.getStartD() + adjNode.getWeight()) {
-                    adjNode.setStartD(node.getStartD() + adjNode.getWeight());
+                adjNode.setStartD(node.getStartD() + adjNode.getWeight());
             }
-            int temp = search(adjNode, g + adjNode.getStartD()+adjNode.getEndD(), threshold);
+            int temp = search(adjNode, g + adjNode.getStartD() + adjNode.getEndD(), threshold);
 
 //            if (temp == found) {
 //                return found;
@@ -118,38 +113,15 @@ public class IDAstar {
         }
 
         return min;
-
     }
 
-    /**
-     * Creates an adjacency list for all nodes
-     *
-     * @param net Node[][], received as a parameter, contains all nodes in the
-     * net
-     */
-    private void createAdjList(Node[][] net) {
-        adjlist = new MyHashMap<Node, MyArrayList<Node>>();
-        for (int i = 0; i < net.length; i++) {
-            for (int j = 0; j < net.length; j++) {
-                adjlist.put(net[i][j], new MyArrayList());
-                if (i + 1 < net.length && net[i + 1][j].getNumber() != 0) {
-                    adjlist.get(net[i][j]).add(net[i + 1][j]);
-                }
-                if (i - 1 >= 0 && net[i - 1][j].getNumber() != 0) {
-                    adjlist.get(net[i][j]).add(net[i - 1][j]);
-                }
-                if (j + 1 < net.length && net[i][j + 1].getNumber() != 0) {
-                    adjlist.get(net[i][j]).add(net[i][j + 1]);
-                }
-                if (j - 1 >= 0 && net[i][j - 1].getNumber() != 0) {
-                    adjlist.get(net[i][j]).add(net[i][j - 1]);
-                }
+    //vain väliaikainen apumetodi IDA*rin visualisoimiseen     
+    private void printVisited(int n) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(visited[i][j] + " ");
             }
+            System.out.println("");
         }
     }
-
-    public MyHashMap<Node, MyArrayList<Node>> getAdjList() {
-        return adjlist;
-    }
-    
 }

@@ -1,6 +1,7 @@
 package graph;
 
 import datastructures.MyArrayList;
+import datastructures.MyHashMap;
 import graph.Node;
 
 public class NetBuilder {
@@ -15,6 +16,11 @@ public class NetBuilder {
     private static Node endNode;
 
     /**
+     * a map containing the adjacent nodes
+     */
+    private static MyHashMap<Node, MyArrayList<Node>> adjlist;
+
+    /**
      * Method to create a net from an array received
      *
      * @param array MyArrayList, received as a parameter, contains the net as
@@ -26,12 +32,10 @@ public class NetBuilder {
         boolean endFound = false;
         int k = 1;
         System.out.println("Alkuperäinen verkko: ");
-        //   System.out.println("array.size " + array.size());
         Node[][] net = new Node[array.size()][array.size()]; //pitää olla neliönmallinen...
         for (int i = 0; i < array.size(); i++) {
             for (int j = 0; j < array.size(); j++) {
                 String row = (String) array.get(i);
-                //  System.out.println("row.charAt(j) " + row.charAt(j) + " j on " +j + " i on " + i);
                 try {
                     if (row.charAt(j) == 's') {
                         startFound = true;
@@ -60,8 +64,7 @@ public class NetBuilder {
                     }
                     k++;
                 } catch (Exception e) {
-                    System.out.println("virhe");
-                    System.out.println("row.charAt(j) " + row.charAt(j) + " j on " + j + " i on " + i);
+                    System.out.println(e);
                 }
             }
             System.out.println("");
@@ -73,6 +76,7 @@ public class NetBuilder {
         }
         System.out.println("");
         setEndDistances(net);
+        createAdjList(net);
         return net;
     }
 
@@ -92,11 +96,42 @@ public class NetBuilder {
         }
     }
 
-    public static Node getStartNode() {
+    /**
+     * Creates an adjacency list for all nodes
+     *
+     * @param net Node[][], received as a parameter, contains all nodes in the
+     * net
+     */
+    private static void createAdjList(Node[][] net) {
+        adjlist = new MyHashMap<Node, MyArrayList<Node>>();
+        for (int i = 0; i < net.length; i++) {
+            for (int j = 0; j < net.length; j++) {
+                adjlist.put(net[i][j], new MyArrayList());
+                if (i + 1 < net.length && net[i + 1][j].getNumber() != 0) {
+                    adjlist.get(net[i][j]).add(net[i + 1][j]);
+                }
+                if (i - 1 >= 0 && net[i - 1][j].getNumber() != 0) {
+                    adjlist.get(net[i][j]).add(net[i - 1][j]);
+                }
+                if (j + 1 < net.length && net[i][j + 1].getNumber() != 0) {
+                    adjlist.get(net[i][j]).add(net[i][j + 1]);
+                }
+                if (j - 1 >= 0 && net[i][j - 1].getNumber() != 0) {
+                    adjlist.get(net[i][j]).add(net[i][j - 1]);
+                }
+            }
+        }
+    }
+
+    public MyHashMap<Node, MyArrayList<Node>> getAdjList() {
+        return adjlist;
+    }
+
+    public Node getStartNode() {
         return startNode;
     }
 
-    public static Node getEndNode() {
+    public Node getEndNode() {
         return endNode;
     }
 }

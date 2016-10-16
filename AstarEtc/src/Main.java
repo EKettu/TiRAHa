@@ -2,6 +2,7 @@
 import algorithms.Astar;
 import algorithms.IDAstar;
 import datastructures.MyArrayList;
+import datastructures.MyHashMap;
 import graph.NetBuilder;
 import graph.Node;
 import java.io.File;
@@ -20,20 +21,21 @@ public class Main {
         Node[][] net = netbuild.createNetFromArray(netArray);
         Node startNode = netbuild.getStartNode();
         Node endNode = netbuild.getEndNode();
-//
-//        Astar astar = new Astar();
-//        long timestamp = System.currentTimeMillis();
-//        System.out.println("A*");
-//        astar.astar(net, startNode, endNode);
-//        System.out.println("Aikaa kului " + (System.currentTimeMillis() - timestamp) + " ms");
-//        System.out.println("");
-//        
-//        net = netbuild.createNetFromArray(netArray);  //jos A*:in ja IDA*:in haluaa ajaa  peräkkäin
-//        startNode = netbuild.getStartNode();          // pitää tehdä nämä
-//        endNode = netbuild.getEndNode();
+        MyHashMap<Node, MyArrayList<Node>> adjlist = netbuild.getAdjList();
+        MyHashMap<Node, MyArrayList<Node>> adjlist2 = netbuild.getAdjList();
+
+        Astar astar = new Astar();
+        long timestamp = System.currentTimeMillis();
+        System.out.println("A*");
+        astar.astar(net, startNode, endNode, adjlist);
+        System.out.println("Aikaa kului " + (System.currentTimeMillis() - timestamp) + " ms");
+        System.out.println("");
+
         System.out.println("IDA*");
         IDAstar idastar = new IDAstar();
-        idastar.idastar(net, startNode, endNode);
+        long timestamp2 = System.currentTimeMillis();
+        idastar.idastar(net, startNode, endNode, adjlist2);
+        System.out.println("Aikaa kului " + (System.currentTimeMillis() - timestamp2) + " ms");
 
     }
 }

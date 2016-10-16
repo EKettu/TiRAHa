@@ -20,7 +20,6 @@ public class FileReader {
         while(scanner.hasNextLine()) {
             String string = scanner.nextLine();
             stringArray.add(string);
-          //  System.out.println("scanner.nextLine on " + string);
         }
         scanner.close();
         }
@@ -28,8 +27,6 @@ public class FileReader {
             System.out.println("Error in reading the file");
             return null;
         }
-        
         return stringArray;
-    }
-    
+    }   
 }

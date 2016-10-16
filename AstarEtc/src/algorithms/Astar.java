@@ -10,13 +10,9 @@ import java.util.*;
 public class Astar {
 
     /**
-     * a map containing the adjacent nodes
+     * MyHashMap containing the shortest path between two nodes
      */
-    private MyHashMap<Node, MyArrayList<Node>> adjlist;
-    /**
-     * a matrix of nodes already visited
-     */
-    private boolean[][] visited;
+    private MyHashMap<Node, Node> path;
 
     /**
      * A* algorithm, calculates the shortest path between two nodes
@@ -25,16 +21,14 @@ public class Astar {
      * @param startNode, starting point of the search
      * @param endNode, end point of the search
      */
-    public void astar(Node[][] net, Node startNode, Node endNode) {
-        visited = new boolean[net.length][net.length];
+    public void astar(Node[][] net, Node startNode, Node endNode, MyHashMap<Node, MyArrayList<Node>> adjlist) {
+        boolean[][] visited = new boolean[net.length][net.length];
         boolean found = false;
-        MyHashMap<Node, Node> path = new MyHashMap<Node, Node>();
+        path = new MyHashMap<Node, Node>();
         Heap heap = new Heap(net.length);
         Node[] table = new Node[net.length * net.length];
-        
-        int netsize = net.length*net.length;
+        int netsize = net.length * net.length;
 
-        createAdjList(net);
         heap.heapInsert(table, startNode);
 
         while (!found) {
@@ -58,6 +52,7 @@ public class Astar {
                 }
             }
         }
+
         if (found) {
             Path path2 = new Path();
             path2.shortestPath(netsize, path, endNode, startNode);
@@ -65,34 +60,7 @@ public class Astar {
         }
     }
 
-    /**
-     * Creates an adjacency list for all nodes
-     *
-     * @param net Node[][], received as a parameter, contains all nodes in the
-     * net
-     */
-    private void createAdjList(Node[][] net) {
-        adjlist = new MyHashMap<Node, MyArrayList<Node>>();
-        for (int i = 0; i < net.length; i++) {
-            for (int j = 0; j < net.length; j++) {
-                adjlist.put(net[i][j], new MyArrayList());
-                if (i + 1 < net.length && net[i + 1][j].getNumber() != 0) {
-                    adjlist.get(net[i][j]).add(net[i + 1][j]);
-                }
-                if (i - 1 >= 0 && net[i - 1][j].getNumber() != 0) {
-                    adjlist.get(net[i][j]).add(net[i - 1][j]);
-                }
-                if (j + 1 < net.length && net[i][j + 1].getNumber() != 0) {
-                    adjlist.get(net[i][j]).add(net[i][j + 1]);
-                }
-                if (j - 1 >= 0 && net[i][j - 1].getNumber() != 0) {
-                    adjlist.get(net[i][j]).add(net[i][j - 1]);
-                }
-            }
-        }
-    }
-
-    public MyHashMap<Node, MyArrayList<Node>> getAdjList() {
-        return adjlist;
+    public MyHashMap<Node, Node> getPath() {
+        return path;
     }
 }
