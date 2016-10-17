@@ -7,7 +7,7 @@ public class MyHashMap <K, V> {
      */
     private Entry<K, V>[] table;
     /**
-     * Initial capacity of HashMap
+     * Initial capacity of MyHashMap
      */
     private int capacity = 4;
     
@@ -19,8 +19,8 @@ public class MyHashMap <K, V> {
     }
     
     /**
-     * Method to add an item to hashmap
-     * @param key, a key to which a value is attached when adding to a hashmap
+     * Method to add an item to MyHashMap
+     * @param key, a key to which a value is attached when adding to a map
      * @param value, a value attached to a key
      */
     public void put(K key, V value) {
@@ -84,7 +84,7 @@ public class MyHashMap <K, V> {
     }
     
     /**
-     * Method to check if the hashmap contains a certain key
+     * Method to check if MyHashMap contains a certain key
      * @param key, received as a parameter, the searched key
      * @return the key that was searched
      */   
@@ -108,7 +108,7 @@ public class MyHashMap <K, V> {
     /**
      * Method to implement hashing function, used to find a location to store
      * key-value-pairs
-     * @param key, a key to which hash value is calculated
+     * @param key, a key for which the hash value is calculated
      * @return hash value
      */
     private int hash(K key) {

@@ -3,11 +3,11 @@ package datastructures;
 public class MyStack {
 
     /**
-     * a table for integers in a stack
+     * Table for integers in a stack
      */
     private int[] table;
     /*
-     * a pointer to the top of the stack
+     * Pointer to the top of the stack
      */
     private int top;
 

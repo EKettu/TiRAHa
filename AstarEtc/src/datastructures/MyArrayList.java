@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class MyArrayList <E>{
     /**
-     * Array for elements in the arraylist
+     * Array for elements in MyArrayList
      */
     private E[] array;
     /**

@@ -10,11 +10,11 @@ import java.util.*;
 public class Path {
 
     /**
-     * length of the shortest path
+     * Length of the shortest path
      */
     private int length;
     /**
-     * set that contains numbers of the nodes on the shortest path
+     * Set that contains numbers of the nodes on the shortest path
      */
     private MyHashSet<Integer> nodePath;
 

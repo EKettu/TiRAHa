@@ -9,7 +9,7 @@ public class Entry <K, V> {
     
     /**
      * Allows storing of data in key-value pairs
-     * @param key, a key in hashmap, received as a parameter
+     * @param key, a key in MyHashMap, received as a parameter
      * @param value, a value attached to a key, received as a parameter
      * @param next, next entry in a map, received as a parameter
      */

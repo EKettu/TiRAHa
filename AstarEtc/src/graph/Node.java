@@ -29,7 +29,7 @@ public class Node implements Comparable<Node> {
     private int number;
 
     /**
-     * Creates a new node with following parameters
+     * Creates a new Node object with following parameters
      *
      * @param number, integer, received as a parameter
      * @param y integer, received as a parameter

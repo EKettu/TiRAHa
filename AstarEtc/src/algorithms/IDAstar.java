@@ -18,25 +18,14 @@ public class IDAstar {
      */
     private MyHashMap<Node, MyArrayList<Node>> adjlist;
     /**
-     * tells if endNode has been found
-     */
-    private boolean found2;
-
-    /**
      * a map of nodes on the path
      */
     private MyHashMap<Node, Node> path;
-
-    /**
-     * Number of the endNode
-     */
- //   private int found;
     /**
      * End point of the search
      */
     private Node endNode;
 
-    //Ei toimi...
     /**
      * IDA* algorithm, calculates the shortest path between two nodes
      *
@@ -50,22 +39,17 @@ public class IDAstar {
         visited = new boolean[net.length][net.length];
         path = new MyHashMap<Node, Node>();
         int netsize = net.length * net.length;
-        found2 = false;
-        //    found = endNode.getNumber();
-
         int threshold = startNode.getStartD();
 
         while (true) {
             int temp = search(startNode, 0, threshold);
-            if (found2) {
+            if (temp == -1) {
                 System.out.println("Polku löytyi");
-                printVisited(net.length);
-//                Path path2 = new Path();
-//                path2.shortestPath(netsize, path, endNode, startNode);
-//                path2.showPath(net, visited, startNode, endNode);
+                Path nodePath = new Path();
+                nodePath.shortestPath(netsize, path, endNode, startNode);
+                nodePath.showPath(net, visited, startNode, endNode);
                 break;
             }
-
             if (temp > Integer.MAX_VALUE) {
                 System.out.println("Polkua ei löydy");
                 break;
@@ -84,44 +68,36 @@ public class IDAstar {
      */
     private Integer search(Node node, int g, int threshold) {
         visited[node.getY()][node.getX()] = true;
-        int f = g + node.getStartD() + node.getWeight() + node.getEndD();
+        int f = g + node.getStartD() + node.getWeight();
+
         if (f > threshold) {
             return f;
         }
 
         if (node == endNode) {
-            found2 = true;
-            //   return found;
+            return -1;
         }
+
         int min = Integer.MAX_VALUE;
 
         for (int i = 0; i < adjlist.get(node).size(); i++) {
             Node adjNode = adjlist.get(node).get(i);
+            if (adjNode == endNode) {
+                visited[adjNode.getY()][adjNode.getX()] = true;
+                path.put(adjNode, node);
+                return -1;
+            }
             if (adjNode.getStartD() > node.getStartD() + adjNode.getWeight()) {
                 adjNode.setStartD(node.getStartD() + adjNode.getWeight());
             }
-            int temp = search(adjNode, g + adjNode.getStartD() + adjNode.getEndD(), threshold);
+            int temp = search(adjNode, g + adjNode.getEndD(), threshold);
 
-//            if (temp == found) {
-//                return found;
-//            }
             if (temp < min) {
                 min = temp;
             }
             path.put(adjNode, node);
             visited[adjNode.getY()][adjNode.getX()] = true;
         }
-
         return min;
-    }
-
-    //vain väliaikainen apumetodi IDA*rin visualisoimiseen     
-    private void printVisited(int n) {
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                System.out.print(visited[i][j] + " ");
-            }
-            System.out.println("");
-        }
     }
 }

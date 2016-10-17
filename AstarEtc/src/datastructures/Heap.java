@@ -14,7 +14,7 @@ public class Heap {
     private int heapsize;
 
     /**
-     * A minimum heap data structure for nodes
+     * A minimum heap data structure for Node objects
      *
      * @param n integer, received as a parameter, determines the size of the
      * heap
@@ -75,7 +75,7 @@ public class Heap {
      * Method to delete the smallest node in the heap
      *
      * @param table, contains nodes in the heap
-     * @return the minimun node that was deleted
+     * @return the minimum node that was deleted
      */
     public Node heapDeleteMin(Node[] table) {
         Node min = table[1];
