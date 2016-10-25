@@ -10,21 +10,21 @@ import java.util.*;
 public class IDAstar {
 
     /**
-     * a matrix of nodes already visited
+     * Matrix of nodes already visited
      */
     private boolean[][] visited;
     /**
-     * map containing the adjacent nodes
-     */
-    private MyHashMap<Node, MyArrayList<Node>> adjlist;
-    /**
-     * a map of nodes on the path
+     * Map of nodes on the path
      */
     private MyHashMap<Node, Node> path;
     /**
      * End point of the search
      */
     private Node endNode;
+    /**
+     * Array containing the adjacent nodes
+     */
+    private Node[][] adjArray;
 
     /**
      * IDA* algorithm, calculates the shortest path between two nodes
@@ -32,14 +32,15 @@ public class IDAstar {
      * @param net, a matrix of nodes, received as a parameter
      * @param startNode, starting point of the search
      * @param endNode, end point of the search
+     * @param adjArray Node[][], contains adjacency nodes
      */
-    public void idastar(Node[][] net, Node startNode, Node endNode, MyHashMap<Node, MyArrayList<Node>> adjlist) {
+    public void idastar(Node[][] net, Node startNode, Node endNode, Node[][] adjArray) {
         this.endNode = endNode;
-        this.adjlist = adjlist;
+        this.adjArray = adjArray;
         visited = new boolean[net.length][net.length];
         path = new MyHashMap<Node, Node>();
         int netsize = net.length * net.length;
-        int threshold = startNode.getStartD();
+        int threshold = startNode.getEndD();
 
         while (true) {
             int temp = search(startNode, 0, threshold);
@@ -50,7 +51,7 @@ public class IDAstar {
                 nodePath.showPath(net, visited, startNode, endNode);
                 break;
             }
-            if (temp > Integer.MAX_VALUE) {
+            if (temp == Integer.MAX_VALUE) {
                 System.out.println("Polkua ei löydy");
                 break;
             }
@@ -64,11 +65,11 @@ public class IDAstar {
      * @param node Node, received as a parameter, current node being searched
      * @param g Integer, received as a parameter, cost of a node
      * @param threshold Integer, received as a parameter, depth being searched
-     * @return
+     * @return the minimum of all f values that is greater than threshold
      */
     private Integer search(Node node, int g, int threshold) {
         visited[node.getY()][node.getX()] = true;
-        int f = g + node.getStartD() + node.getWeight();
+        int f = g + node.getEndD();
 
         if (f > threshold) {
             return f;
@@ -80,23 +81,21 @@ public class IDAstar {
 
         int min = Integer.MAX_VALUE;
 
-        for (int i = 0; i < adjlist.get(node).size(); i++) {
-            Node adjNode = adjlist.get(node).get(i);
-            if (adjNode == endNode) {
-                visited[adjNode.getY()][adjNode.getX()] = true;
-                path.put(adjNode, node);
-                return -1;
-            }
-            if (adjNode.getStartD() > node.getStartD() + adjNode.getWeight()) {
-                adjNode.setStartD(node.getStartD() + adjNode.getWeight());
-            }
-            int temp = search(adjNode, g + adjNode.getEndD(), threshold);
+        for (int i = 0; i < 4; i++) {
+            Node adjNode = adjArray[node.getNumber()][i];
 
-            if (temp < min) {
-                min = temp;
+            if (adjNode != null) {              
+                int temp = search(adjNode, g + adjNode.getWeight(), threshold);
+                path.put(adjNode, node);
+                visited[adjNode.getY()][adjNode.getX()] = true;
+
+                if (adjNode == endNode || temp == -1) {
+                    return -1;
+                }
+                if (temp < min) {
+                    min = temp;
+                }
             }
-            path.put(adjNode, node);
-            visited[adjNode.getY()][adjNode.getX()] = true;
         }
         return min;
     }

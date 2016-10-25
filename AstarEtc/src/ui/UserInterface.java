@@ -3,7 +3,6 @@ package ui;
 import algorithms.Astar;
 import algorithms.IDAstar;
 import datastructures.MyArrayList;
-import datastructures.MyHashMap;
 import graph.NetBuilder;
 import graph.Node;
 import java.io.File;
@@ -38,17 +37,16 @@ public class UserInterface {
             Node[][] net = netbuild.createNetFromArray(netArray);
             Node startNode = netbuild.getStartNode();
             Node endNode = netbuild.getEndNode();
-            MyHashMap<Node, MyArrayList<Node>> adjlist = netbuild.getAdjList();
-            MyHashMap<Node, MyArrayList<Node>> adjlist2 = netbuild.getAdjList();
+            Node[][] adjArray = netbuild.getAdjArray();
 
             if (algorithm.equalsIgnoreCase("A")) {
-                runAstar(net, startNode, endNode, adjlist);
+                runAstar(net, startNode, endNode, adjArray);
 
             } else if (algorithm.equalsIgnoreCase("I")) {
-                runIDAstar(net, startNode, endNode, adjlist2);
+                runIDAstar(net, startNode, endNode, adjArray);
             } else if (algorithm.equalsIgnoreCase("B")) {
-                runAstar(net, startNode, endNode, adjlist);
-                runIDAstar(net, startNode, endNode, adjlist2);
+                runAstar(net, startNode, endNode, adjArray);
+                runIDAstar(net, startNode, endNode, adjArray);
             }
 
         }
@@ -62,15 +60,15 @@ public class UserInterface {
      * nodes
      * @param startNode Node, received as a parameter, start point of the search
      * @param endNode Node, received as a parameter, end point of the search
-     * @param adjlist MyHashMap, received as a parameter, contains adjacency
+     * @param adjArray  Node[][], received as a parameter, contains adjacency
      * nodes
      */
     private void runAstar(Node[][] net, Node startNode, Node endNode,
-            MyHashMap<Node, MyArrayList<Node>> adjlist) {
+            Node[][] adjArray) {
         Astar astar = new Astar();
         long timestamp = System.currentTimeMillis();
         System.out.println("A*");
-        astar.astar(net, startNode, endNode, adjlist);
+        astar.astar(net, startNode, endNode, adjArray);
         System.out.println("Aikaa kului " + (System.currentTimeMillis() - timestamp) + " ms");
         System.out.println("");
 
@@ -83,15 +81,15 @@ public class UserInterface {
      * nodes
      * @param startNode Node, received as a parameter, start point of the search
      * @param endNode Node, received as a parameter, end point of the search
-     * @param adjlist MyHashMap, received as a parameter, contains adjacency
+     * @param adjArray  Node[][], received as a parameter, contains adjacency
      * nodes
      */
     private void runIDAstar(Node[][] net, Node startNode, Node endNode,
-            MyHashMap<Node, MyArrayList<Node>> adjlist) {
+            Node[][] adjArray) {
         System.out.println("IDA*");
         IDAstar idastar = new IDAstar();
         long timestamp2 = System.currentTimeMillis();
-        idastar.idastar(net, startNode, endNode, adjlist);
+        idastar.idastar(net, startNode, endNode, adjArray);
         System.out.println("Aikaa kului " + (System.currentTimeMillis() - timestamp2) + " ms");
 
     }

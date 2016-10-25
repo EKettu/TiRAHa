@@ -20,8 +20,9 @@ public class Astar {
      * @param net, a matrix of nodes, received as a parameter
      * @param startNode, starting point of the search
      * @param endNode, end point of the search
+     * @param adjArray Node[][], contains adjacency nodes
      */
-    public void astar(Node[][] net, Node startNode, Node endNode, MyHashMap<Node, MyArrayList<Node>> adjlist) {
+    public void astar(Node[][] net, Node startNode, Node endNode, Node[][] adjArray) {
         boolean[][] visited = new boolean[net.length][net.length];
         boolean found = false;
         path = new MyHashMap<Node, Node>();
@@ -33,14 +34,15 @@ public class Astar {
 
         while (!found) {
             if (heap.empty()) {
-                System.out.println("Polkua ei löydy.");
+                System.out.println("Polkua ei lˆydy.");
                 break;
             }
             Node node = heap.heapDeleteMin(table);
             visited[node.getY()][node.getX()] = true;
 
-            for (int i = 0; i < adjlist.get(node).size(); i++) {
-                Node adjNode = adjlist.get(node).get(i);
+            for (int i = 0; i < 4; i++) {
+                Node adjNode = adjArray[node.getNumber()][i];
+                if(adjNode != null) {
                 if (adjNode == endNode) {
                     found = true;
                     visited[adjNode.getY()][adjNode.getX()] = true;
@@ -49,6 +51,7 @@ public class Astar {
                     adjNode.setStartD(node.getStartD() + adjNode.getWeight());
                     heap.heapInsert(table, adjNode);
                     path.put(adjNode, node);
+                }
                 }
             }
         }

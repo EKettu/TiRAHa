@@ -45,7 +45,7 @@ public class PathTest {
         File file = new File("test2.txt");
         MyArrayList array = filereader.readNetFromFile(file);
         Node[][] net = netbuild.createNetFromArray(array);
-        astar.astar(net, netbuild.getStartNode(), netbuild.getEndNode(), netbuild.getAdjList());
+        astar.astar(net, netbuild.getStartNode(), netbuild.getEndNode(), netbuild.getAdjArray());
         path.shortestPath(net.length * net.length, astar.getPath(), netbuild.getEndNode(), netbuild.getStartNode());
         assertEquals(18, path.getLength());
     }

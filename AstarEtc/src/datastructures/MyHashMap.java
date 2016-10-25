@@ -9,7 +9,7 @@ public class MyHashMap<K, V> {
     /**
      * Initial capacity of MyHashMap
      */
-    private int capacity = 4;
+    private int capacity = 32;
 
     /**
      * An implementation of a custom HashMap
