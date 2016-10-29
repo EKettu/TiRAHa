@@ -25,6 +25,10 @@ public class IDAstar {
      * Array containing the adjacent nodes
      */
     private Node[][] adjArray;
+    /**
+     * Boolean value, true if the path has been found
+     */
+    private boolean found;
 
     /**
      * IDA* algorithm, calculates the shortest path between two nodes
@@ -35,6 +39,7 @@ public class IDAstar {
      * @param adjArray Node[][], contains adjacency nodes
      */
     public void idastar(Node[][] net, Node startNode, Node endNode, Node[][] adjArray) {
+        found = false;
         this.endNode = endNode;
         this.adjArray = adjArray;
         visited = new boolean[net.length][net.length];
@@ -45,14 +50,15 @@ public class IDAstar {
         while (true) {
             int temp = search(startNode, 0, threshold);
             if (temp == -1) {
-                System.out.println("Polku löytyi");
+                found = true;
+                System.out.println("Path found");
                 Path nodePath = new Path();
                 nodePath.shortestPath(netsize, path, endNode, startNode);
                 nodePath.showPath(net, visited, startNode, endNode);
                 break;
             }
             if (temp == Integer.MAX_VALUE) {
-                System.out.println("Polkua ei löydy");
+                System.out.println("No path exists.");
                 break;
             }
             threshold = temp;
@@ -84,12 +90,12 @@ public class IDAstar {
         for (int i = 0; i < 4; i++) {
             Node adjNode = adjArray[node.getNumber()][i];
 
-            if (adjNode != null) {              
+            if (adjNode != null) {
                 int temp = search(adjNode, g + adjNode.getWeight(), threshold);
                 path.put(adjNode, node);
                 visited[adjNode.getY()][adjNode.getX()] = true;
 
-                if (adjNode == endNode || temp == -1) {
+                if (temp == -1) {
                     return -1;
                 }
                 if (temp < min) {
@@ -98,5 +104,13 @@ public class IDAstar {
             }
         }
         return min;
+    }
+
+    public MyHashMap<Node, Node> getPath() {
+        return path;
+    }
+    
+    public boolean getFound() {
+        return found;
     }
 }

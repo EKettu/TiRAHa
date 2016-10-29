@@ -15,6 +15,7 @@ public class HeapTest {
     Node node;
     Node node2;
     Node node3;
+    Node node4;
     Node[] table;
 
     @BeforeClass
@@ -27,10 +28,11 @@ public class HeapTest {
 
     @Before
     public void setUp() {
-        heap = new Heap(5);
+        heap = new Heap(2);
         node = new Node(1, 0, 0, 0, 100, 1);
         node2 = new Node(2, 1, 1, 2, 100, 1);
         node3 = new Node(3, 1, 2, 3, 100, 1);
+        node4 = new Node(4, 1, 2, 3, 100, 1);
         table = heap.getNodeTable();
     }
 
@@ -65,5 +67,19 @@ public class HeapTest {
         heap.heapInsert(table, node2);
         heap.heapDeleteMin(table);
         assertEquals(node2, heap.heapMin(table));
+    }
+    
+        @Test
+    public void deleteMinWorks2() {    
+        assertEquals(null, heap.heapDeleteMin(table));
+    }
+    
+            @Test
+    public void heapFullWorks() {   
+        heap.heapInsert(table, node);
+        heap.heapInsert(table, node3);
+        heap.heapInsert(table, node2);
+        heap.heapInsert(table, node4);
+        assertEquals(true, heap.full());
     }
 }

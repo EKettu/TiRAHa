@@ -10,9 +10,13 @@ import java.util.*;
 public class Path {
 
     /**
-     * Length of the shortest path
+     * Length of the shortest path (sum of the node weights)
      */
     private int length;
+    /**
+     * How many nodes are on the shortest path
+     */
+    private int nodes;
     /**
      * Set that contains numbers of the nodes on the shortest path
      */
@@ -30,25 +34,28 @@ public class Path {
     public void shortestPath(int netsize, MyHashMap<Node, Node> path, Node node, Node startNode) {
         Node node2 = path.get(node);
         length = 0 + node2.getWeight();
+        nodes = 0;
         MyStack stack = new MyStack(netsize);
         nodePath = new MyHashSet<Integer>();
         while (node2 != startNode) {
             stack.push(node2.getNumber());
             node2 = path.get(node2);
             length = length + node2.getWeight();
+            nodes++;
         }
 
-        System.out.println("Polku koostuu solmuista : ");
+        System.out.println("Path consists of nodes : ");
         System.out.print(startNode.getNumber() + " ");
         while (!stack.empty()) {
             int x = stack.pop();
             nodePath.add(x);
             System.out.print(x + " ");
         }
-
+        nodes++;
         System.out.print(node.getNumber());
         System.out.println("");
-        System.out.println("Polun pituus on " + length);
+        System.out.println("Path consist in total of "+nodes+ " nodes.");
+        System.out.println("Length of the shortest path is " + length);
 
     }
 
@@ -68,20 +75,20 @@ public class Path {
             for (int j = 0; j < net.length; j++) {
                 if (visited[i][j]) {
                     if (nodePath.contains(net[i][j].getNumber())) {
-                        System.out.print("@ ");
+                        System.out.print("@");
                     } else if (net[i][j] == startNode) {
-                        System.out.print("s ");
+                        System.out.print("s");
                     } else if (net[i][j] == endNode) {
-                        System.out.print("e ");
+                        System.out.print("e");
                     } else {
-                        System.out.print("x ");
+                        System.out.print("x");
                     }
                 } else if (net[i][j].getNumber() == 0) {
-                    System.out.print("# ");
+                    System.out.print("#");
                 } else if (net[i][j].getWeight() > 1) {
-                    System.out.print("o ");
+                    System.out.print("o");
                 } else {
-                    System.out.print(". ");
+                    System.out.print(".");
                 }
             }
             System.out.println("");

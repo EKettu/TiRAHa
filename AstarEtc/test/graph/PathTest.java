@@ -2,6 +2,8 @@ package graph;
 
 import graph.Path;
 import algorithms.Astar;
+import algorithms.Dijkstra;
+import algorithms.IDAstar;
 import datastructures.MyArrayList;
 import java.io.File;
 import org.junit.After;
@@ -16,6 +18,8 @@ public class PathTest {
 
     Path path;
     Astar astar;
+    IDAstar idastar;
+    Dijkstra dijkstra;
     NetBuilder netbuild;
     FileReader filereader;
 
@@ -31,6 +35,8 @@ public class PathTest {
     public void setUp() {
         path = new Path();
         astar = new Astar();
+        idastar = new IDAstar();
+        dijkstra = new Dijkstra();
         netbuild = new NetBuilder();
         filereader = new FileReader();
 
@@ -41,13 +47,33 @@ public class PathTest {
     }
 
     @Test
-    public void pathLengthOk() {
-        File file = new File("test2.txt");
+    public void pathLengthOkAstar() {
+        File file = new File("test_small1.txt");
         MyArrayList array = filereader.readNetFromFile(file);
         Node[][] net = netbuild.createNetFromArray(array);
         astar.astar(net, netbuild.getStartNode(), netbuild.getEndNode(), netbuild.getAdjArray());
         path.shortestPath(net.length * net.length, astar.getPath(), netbuild.getEndNode(), netbuild.getStartNode());
-        assertEquals(18, path.getLength());
+        assertEquals(6, path.getLength());
+    }
+
+    @Test
+    public void pathLengthOkIDAstar() {
+        File file = new File("test_small1.txt");
+        MyArrayList array = filereader.readNetFromFile(file);
+        Node[][] net = netbuild.createNetFromArray(array);
+        idastar.idastar(net, netbuild.getStartNode(), netbuild.getEndNode(), netbuild.getAdjArray());
+        path.shortestPath(net.length * net.length, idastar.getPath(), netbuild.getEndNode(), netbuild.getStartNode());
+        assertEquals(6, path.getLength());
+    }
+
+    @Test
+    public void pathLengthOkDijkstra() {
+        File file = new File("test_small1.txt");
+        MyArrayList array = filereader.readNetFromFile(file);
+        Node[][] net = netbuild.createNetFromArray(array);
+        dijkstra.dijkstra(net, netbuild.getStartNode(), netbuild.getEndNode(), netbuild.getAdjArray());
+        path.shortestPath(net.length * net.length, dijkstra.getPath(), netbuild.getEndNode(), netbuild.getStartNode());
+        assertEquals(6, path.getLength());
     }
 
 }

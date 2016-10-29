@@ -55,7 +55,6 @@ public class MyHashMap<K, V> {
             }
             previous.next = entry;
         }
-
     }
 
     /**
@@ -78,7 +77,7 @@ public class MyHashMap<K, V> {
                 temp = temp.next;
             }
         }
-        System.out.println("Avaimella ei löydy arvoa");
+        System.out.println("No value associated with the key.");
         return null;
     }
 
@@ -102,7 +101,6 @@ public class MyHashMap<K, V> {
             }
             return null;
         }
-
     }
 
     /**

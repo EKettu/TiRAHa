@@ -34,8 +34,8 @@ public class MyStackTest {
         stack.push(1);
         assertEquals(1, stack.pop());
     }
-    
-        @Test
+
+    @Test
     public void pushWorks2() {
         stack.push(1);
         stack.push(2);
@@ -52,15 +52,18 @@ public class MyStackTest {
         stack.push(3);
         assertEquals(3, stack.pop());
     }
-    
-        @Test
+
+    @Test
     public void popWorks2() {
         stack.push(1);
         stack.pop();
         assertEquals(-1, stack.pop());
     }
-    
-    
+
+    @Test
+    public void popWorks3() {
+        assertEquals(-1, stack.pop());
+    }
 
     @Test
     public void fullWorks() {

@@ -3,28 +3,28 @@ package graph;
 public class Node implements Comparable<Node> {
 
     /**
-     * the value of y coordinate in a matrix
+     * Value of y coordinate in a matrix
      */
     private int y;
     /**
-     * the value of x coordinate in a matrix
+     * Value of x coordinate in a matrix
      */
     private int x;
     /**
-     * the actual distance between a node and the goal node
+     * Actual distance between a node and the goal node
      */
     private int startDist;
     /**
-     * the shortest possible distance between the node and a goal node
+     * Shortest possible distance between the node and a goal node
      */
     private int endDist;
     /**
-     * the cost of visiting the node
+     * Cost of visiting the node
      */
     private int weight;
 
     /*
-     * serial number of a node
+     * Serial number of a node
      */
     private int number;
 
@@ -88,6 +88,7 @@ public class Node implements Comparable<Node> {
         return number;
     }
 
+    //Needed if Java's PriorityQueue is used
     @Override
     public int compareTo(Node node) {
         return (this.startDist + this.endDist) - (node.startDist + node.endDist);

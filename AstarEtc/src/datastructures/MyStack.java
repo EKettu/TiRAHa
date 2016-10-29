@@ -43,7 +43,7 @@ public class MyStack {
             top++;
             table[top] = x;
         } else {
-            System.out.println("The Stack is full.");
+            System.out.println("Stack is full.");
         }
     }
 

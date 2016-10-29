@@ -43,23 +43,11 @@ public class NetBuilderTest {
         Node[][] net = netbuild.createNetFromArray(array);
         assertFalse(net==null);   
     }
-//
-//    @Test
-//    public void startNodeStartDistIsRight() {
-//        Node[][] net = netbuild.createNet(5, 0, 0, 4, 4);
-//        assertEquals(netbuild.getStartNode().getStartD(), 0);
-//    }
-//
-//    @Test
-//    public void endNodeCoordinatesRight() {
-//        Node[][] net = netbuild.createNet(5, 0, 0, 4, 4);
-//        assertTrue(net[4][4] == netbuild.getEndNode());
-//    }
-//
-//    @Test
-//    public void endNodeStartDistIsRight() {
-//        Node[][] net = netbuild.createNet(5, 0, 0, 4, 4);
-//        assertEquals(netbuild.getEndNode().getStartD(), Integer.MAX_VALUE);
-//    }
-
+        @Test
+    public void createNetWorks2() {
+        File file = new File("nofile.txt");
+        MyArrayList array = filereader.readNetFromFile(file);
+        Node[][] net = netbuild.createNetFromArray(array);
+        assertTrue(net==null);   
+    }
 }

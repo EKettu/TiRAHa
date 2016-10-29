@@ -20,7 +20,7 @@ public class Heap {
      * heap
      */
     public Heap(int n) {
-        table = new Node[n * n];
+        table = new Node[(n * n)+1];
         heapsize = 0;
         table[0] = null;
     }
@@ -36,25 +36,21 @@ public class Heap {
         int right = right(i);
         int smallest = 0;
         if (right <= heapsize) {
-            if (table[left].getStartD() + table[left].getEndD() + table[left].getWeight()
-                    < table[right].getStartD() + table[right].getEndD() + 
-                    table[right].getWeight()) {
+            if (table[left].getStartD() + table[left].getEndD()
+                    < table[right].getStartD() + table[right].getEndD()) {
                 smallest = left;
             } else {
                 smallest = right;
             }
-            if (table[i].getStartD() + table[i].getEndD() + table[i].getWeight()
-                    > table[smallest].getStartD() + table[smallest].getEndD() + 
-                    table[smallest].getWeight()) {
+            if (table[i].getStartD() + table[i].getEndD()
+                    > table[smallest].getStartD() + table[smallest].getEndD()) {
                 Node temp = table[i];
                 table[i] = table[smallest];
                 table[smallest] = temp;
                 heapify(table, smallest);
             }
-        } else if (left == heapsize && table[i].getStartD() + table[i].getEndD() 
-                + table[i].getWeight()
-                > table[left].getStartD() + table[left].getEndD() + 
-                table[left].getWeight()) {
+        } else if (left == heapsize && table[i].getStartD() + table[i].getEndD()
+                > table[left].getStartD() + table[left].getEndD()) {
             Node temp = table[i];
             table[i] = table[left];
             table[left] = temp;
@@ -78,11 +74,16 @@ public class Heap {
      * @return the minimum node that was deleted
      */
     public Node heapDeleteMin(Node[] table) {
-        Node min = table[1];
-        table[1] = table[heapsize];
-        heapsize--;
-        heapify(table, 1);
-        return min;
+        if (!empty()) {
+            Node min = table[1];
+            table[1] = table[heapsize];
+            heapsize--;
+            heapify(table, 1);
+            return min;
+        } else {
+            System.out.println("Cannot delete from an empty heap");
+            return null;
+        }
     }
 
     /**
@@ -93,14 +94,18 @@ public class Heap {
      * heap
      */
     public void heapInsert(Node[] table, Node node) {
-        heapsize++;
-        int i = heapsize;
-        while (i > 1 && table[parent(i)].getStartD() + table[parent(i)].getEndD()
-                > node.getStartD() + node.getEndD()) {
-            table[i] = table[parent(i)];
-            i = parent(i);
+        if (!full()) {
+            heapsize++;
+            int i = heapsize;
+            while (i > 1 && table[parent(i)].getStartD() + table[parent(i)].getEndD()
+                    > node.getStartD() + node.getEndD()) {
+                table[i] = table[parent(i)];
+                i = parent(i);
+            }
+            table[i] = node;
+        } else {
+            System.out.println("Heap is full.");
         }
-        table[i] = node;
     }
 
     /**
@@ -139,13 +144,26 @@ public class Heap {
     public Node[] getNodeTable() {
         return table;
     }
-    
+
     /**
      * Method to check if the heap is empty
+     *
      * @return true if empty
      */
     public boolean empty() {
-        if(heapsize <=0) {
+        if (heapsize <= 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Method to check if the heap is full
+     *
+     * @return true if full
+     */
+    public boolean full() {
+        if (heapsize == table.length-1) {
             return true;
         }
         return false;
