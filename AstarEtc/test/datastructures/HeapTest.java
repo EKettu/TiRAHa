@@ -68,14 +68,14 @@ public class HeapTest {
         heap.heapDeleteMin(table);
         assertEquals(node2, heap.heapMin(table));
     }
-    
-        @Test
-    public void deleteMinWorks2() {    
+
+    @Test
+    public void deleteMinWorks2() {
         assertEquals(null, heap.heapDeleteMin(table));
     }
-    
-            @Test
-    public void heapFullWorks() {   
+
+    @Test
+    public void heapFullWorks() {
         heap.heapInsert(table, node);
         heap.heapInsert(table, node3);
         heap.heapInsert(table, node2);

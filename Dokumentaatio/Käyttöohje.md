@@ -1,0 +1,7 @@
+Ohjelma suoritetaan ajamalla jar-tiedosto, ja ensimmäiseksi ohjelma listaa kaikki saatavilla olevat verkon sisältävät tekstitiedostot. Tämän jälkeen käyttäjän on kirjoitettava haluamansa tekstitiedoston nimi, jonka syöttämisen jälkeen ohjelma kysyy millä algoritmilla verkosta lähdetään etsimään lyhyintä polkua. Kirjoittamalla kirjaimen "a" (ei ole väliä onko iso vai pieni kirjain) valitaan A* algoritmi, kirjaimella "d" Dijkstra ja kirjaimella "i" IDA*. Kirjoittamalla kirjain "e" ohjelma ajaa kaikki kolme algoritmia. Ohjelman suoritus päättyy aina joko yhden tai kaikkien kolmen algortmin suoritukseen. Kirjoittamalla "x" joko tiedostoa tai algoritmia valitessa ohjelman suoritus päättyy. 
+
+Ohjelmaa suoritettaessa on tärkeää kirjoittaa tiedoston nimi oikein, ohjelma ei ole varautunut kunnolla virheellisiin syötteisiin. 
+
+AstarEtc hyväksyy tällä hetkellä vain neliönmallisina (esim. 10x10) karttoina esitettäviä verkkoja, jotka kuvataan tekstitiedosssa pisteiden, risuaitojen ja o-kirjainten avulla. Mukana täytyy olla myös s-ja e-kirjaimilla merkityt alku- ja loppusolmu. Ohjelma tarkistaa, että verkossa on mukana alku-ja loppusolmu, molempia on myös oltava tasan yksi kappale. 
+
+AstarEtc.jar-tiedosto sijaitsee TiRAHa-kansiossa (projektin kansio). Verkot sisältävät tekstitiedostot on talletettu AstarEtc-kansioon.

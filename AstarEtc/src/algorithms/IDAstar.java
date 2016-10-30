@@ -5,8 +5,12 @@ import graph.Node;
 import datastructures.Heap;
 import datastructures.MyArrayList;
 import datastructures.MyHashMap;
-import java.util.*;
 
+/**
+ * Iterative deepening A* algorithm
+ *
+ * @author ekettu
+ */
 public class IDAstar {
 
     /**
@@ -33,7 +37,7 @@ public class IDAstar {
     /**
      * IDA* algorithm, calculates the shortest path between two nodes
      *
-     * @param net, a matrix of nodes, received as a parameter
+     * @param net Node[][], a matrix of nodes, received as a parameter
      * @param startNode, starting point of the search
      * @param endNode, end point of the search
      * @param adjArray Node[][], contains adjacency nodes
@@ -109,7 +113,7 @@ public class IDAstar {
     public MyHashMap<Node, Node> getPath() {
         return path;
     }
-    
+
     public boolean getFound() {
         return found;
     }

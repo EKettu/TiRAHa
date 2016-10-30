@@ -28,7 +28,6 @@ public class MyHashSetTest {
         node = new Node(1, 0, 0, 0, 100, 1);
         node2 = new Node(2, 1, 1, 2, 100, 1);
 
-
     }
 
     @After

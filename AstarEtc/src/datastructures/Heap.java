@@ -2,6 +2,11 @@ package datastructures;
 
 import graph.Node;
 
+/**
+ * Minimum binary heap for Node objects
+ *
+ * @author ekettu
+ */
 public class Heap {
 
     /**
@@ -20,7 +25,7 @@ public class Heap {
      * heap
      */
     public Heap(int n) {
-        table = new Node[(n * n)+1];
+        table = new Node[(n * n) + 1];
         heapsize = 0;
         table[0] = null;
     }
@@ -163,7 +168,7 @@ public class Heap {
      * @return true if full
      */
     public boolean full() {
-        if (heapsize == table.length-1) {
+        if (heapsize == table.length - 1) {
             return true;
         }
         return false;

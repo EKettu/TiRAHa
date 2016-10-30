@@ -41,16 +41,16 @@ public class MyHashMapTest {
     @After
     public void tearDown() {
     }
-    
+
     @Test
     public void addWorks() {
-        nodemap.put(node, node2);     
+        nodemap.put(node, node2);
         assertEquals(node2, nodemap.get(node));
     }
-    
-        @Test
+
+    @Test
     public void addWorks2() {
-        nodemap.put(node, node2); 
+        nodemap.put(node, node2);
         nodemap.put(node2, node3);
         nodemap.put(node3, node4);
         nodemap.put(node4, node5);

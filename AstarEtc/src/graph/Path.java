@@ -5,8 +5,12 @@ import datastructures.MyHashMap;
 import datastructures.MyHashSet;
 import graph.Node;
 import datastructures.MyStack;
-import java.util.*;
 
+/**
+ * Calculates and prints the shortest path
+ *
+ * @author ekettu
+ */
 public class Path {
 
     /**
@@ -54,7 +58,7 @@ public class Path {
         nodes++;
         System.out.print(node.getNumber());
         System.out.println("");
-        System.out.println("Path consist in total of "+nodes+ " nodes.");
+        System.out.println("Path consist in total of " + nodes + " nodes.");
         System.out.println("Length of the shortest path is " + length);
 
     }

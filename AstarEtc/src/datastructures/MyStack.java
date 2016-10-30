@@ -1,5 +1,10 @@
 package datastructures;
 
+/**
+ * Custom Stack for integers
+ *
+ * @author ekettu
+ */
 public class MyStack {
 
     /**

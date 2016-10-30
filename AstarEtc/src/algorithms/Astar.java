@@ -5,8 +5,12 @@ import graph.Node;
 import datastructures.Heap;
 import datastructures.MyArrayList;
 import datastructures.MyHashMap;
-import java.util.*;
 
+/**
+ * A* algorithm
+ *
+ * @author ekettu
+ */
 public class Astar {
 
     /**
@@ -21,7 +25,7 @@ public class Astar {
     /**
      * A* algorithm, calculates the shortest path between two nodes
      *
-     * @param net, a matrix of nodes, received as a parameter
+     * @param net Node[][], a matrix of nodes, received as a parameter
      * @param startNode, starting point of the search
      * @param endNode, end point of the search
      * @param adjArray Node[][], contains adjacency nodes

@@ -1,5 +1,12 @@
 package datastructures;
 
+/**
+ * Custom HashMap
+ *
+ * @author ekettu
+ * @param <K> Key
+ * @param <V> Value
+ */
 public class MyHashMap<K, V> {
 
     /**

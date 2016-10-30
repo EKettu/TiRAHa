@@ -1,5 +1,10 @@
 package graph;
 
+/**
+ * Node in a net
+ *
+ * @author ekettu
+ */
 public class Node implements Comparable<Node> {
 
     /**

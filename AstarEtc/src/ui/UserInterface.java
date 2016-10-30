@@ -10,6 +10,11 @@ import java.io.File;
 import java.util.Scanner;
 import utilities.FileReader;
 
+/**
+ * Text-based interface for communicating with an user
+ *
+ * @author ekettu
+ */
 public class UserInterface {
 
     /**

@@ -38,22 +38,22 @@ public class MyArrayListTest {
 
     @Test
     public void addWorks() {
-        array.add(node);     
+        array.add(node);
         assertEquals(node, array.get(0));
     }
-    
+
     @Test
     public void addWorks2() {
         array.add(node);
         array.add(node2);
         assertEquals(node2, array.get(1));
     }
-    
-        @Test
+
+    @Test
     public void addWorks3() {
-       for(int i = 0; i<=100; i++) {
-           array.add(node);
-       }
+        for (int i = 0; i <= 100; i++) {
+            array.add(node);
+        }
         assertEquals(101, array.size());
     }
 }

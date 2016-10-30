@@ -5,6 +5,11 @@ import datastructures.MyHashMap;
 import graph.Node;
 import graph.Path;
 
+/**
+ * Dijkstra's algorithm
+ *
+ * @author ekettu
+ */
 public class Dijkstra {
 
     /**
@@ -12,7 +17,7 @@ public class Dijkstra {
      */
     private MyHashMap<Node, Node> path;
     /**
-     * Array that contains distances of all nodes to the start node
+     * Array that contains distances of all nodes from the start node
      */
     private int[] distances;
     /**
@@ -23,7 +28,7 @@ public class Dijkstra {
     /**
      * Dijkstra's path-finding algorithm
      *
-     * @param net, a matrix of nodes, received as a parameter
+     * @param net Node[][], a matrix of nodes, received as a parameter
      * @param startNode, starting point of the search
      * @param endNode, end point of the search
      * @param adjArray Node[][], contains adjacency nodes

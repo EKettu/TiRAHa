@@ -4,6 +4,11 @@ import datastructures.MyArrayList;
 import datastructures.MyHashMap;
 import graph.Node;
 
+/**
+ * Builds a net of nodes for path-finding algorithms
+ *
+ * @author ekettu
+ */
 public class NetBuilder {
 
     /**

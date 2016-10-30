@@ -35,7 +35,7 @@ public class Main {
 //        astar.astar(net, startNode, endNode, adjArray);
 //        System.out.println("Running time was " + (System.currentTimeMillis() - timestamp) + " ms");
 //        System.out.println("");
-//        
+        
 //        Dijkstra dijkstra = new Dijkstra();
 //        timestamp = System.currentTimeMillis();
 //        System.out.println("Dijkstra");

@@ -1,4 +1,5 @@
-*Suorituskykytestausta 1.9.16 A*-algoritmi
+***Suorituskykytestausta 1.9.16***
+A*-algoritmi
 
 Testi1
 astar.astar(100, 0, 0, 99, 99); 
@@ -10,6 +11,7 @@ solmuluettelon tulostus mukana
 Suorituskerta 1. Aikaa kului 266 ms
 Suorituskerta 2. Aikaa kului 315 ms
 Suorituskerta 3. Aikaa kului 235 ms
+
 
 Testi2
 astar.astar(100, 0, 0, 99, 99);
@@ -57,7 +59,8 @@ Suorituskerta 2. Aikaa kului 6934 ms
 Suorituskerta 3. Aikaa kului 7177 ms
 
 
-*Suorituskykytestausta 16.10.16 
+
+***Suorituskykytestausta 16.10.16***
 
 A*-algoritmi
 
@@ -86,7 +89,7 @@ Suorituskerta 3. Aikaa kului 5322 ms
 
 
 
-*Suorituskykytestausta 27.10.16
+***Suorituskykytestausta 27.10.16***
 A* ja Dijkstra 
 (Nyt vieruslistojen tekotapaa muutettu, nyt se huomattavasti nopeampaa kuin edellisellä kerralla, joten testaukset hieman suuremmillakin syötteillä onnistuvat ainakin A*:in kohdalla.) 
 
@@ -244,3 +247,47 @@ Suorituskerta 3. Aikaa kului 78912 ms
 IDA* ei kokeiltu
 
 Kokeilin vielä samaa karttaa toistamiseen (ks. Suorituskykytestausta 27.10.16), koska on kiinnostavaa, miten paljon nopeampi etenkin Dijkstra on 500x500 verkossa, jossa on seiniä ja painavampia solmuja verrattuna tämän päivän testin 2. tuloksiin (map500_2.txt). 
+
+
+***Suorituskykytestausta 30.10.16***
+
+(Seuraavat testit tehtiin eri tietokoneella kuin aiemmat testit, nyt käytetty tietokone huomattavasti edellistä tehokkaampi.)
+
+Testi 1. 
+verkkotiedosto: map1000_1.txt (1000x1000, verkossa seiniä ja painavampia solmuja)
+(lyhimmän polun pituus 1294)
+
+A*
+Suorituskerta 1. Aikaa kului 20735 ms
+Suorituskerta 2. Aikaa kului 20000 ms
+Suorituskerta 2. Aikaa kului 21424 ms
+
+Dijkstra ei löytänyt polkua alle 3 minuutissa
+
+IDA* ei kokeiltu
+
+
+Testi 2.
+verkkotiedosto: map1000_2.txt (1000x1000, verkossa vain tavallisia solmuja)
+(lyhimmän polun pituus 1698)
+
+A* väittää lyhyimmän polun pituudeksi 1700, vaikka se on oikeasti 1698. Syytä selvitellessäni huomasin, että solmun nro 113110 kohdalla polku siirtyy solmuun 113109 vaikka sen pitäisi mennä solmuun 114110. A* kyllä lisää solmun 113110 vierussolmuja läpikäydessään kekoon molemmat solmut, ja solmun 113109 startDistance on 223 ja endDistance 1477, kun taas solmulla 114110 startDistance on 223 ja endDistance 1475. Eli solmun 114110 prioriteetti keossa on 1698 ja solmun 113109 prioriteetti on 1700, eli keon pitäisi valita näistä kahdesta solmu 114110, mutta jostain syystä se valitsee seuraavaksi käsittelyyn solmun 113109 eikä algoritmi siten varsinaisesti vieraile ikinä solmussa 114110. En onnistunut selvittämään syytä tälle, toistaiseksi olen havainnut testaamistani kartoista tämän ongelman vain tässä kartassa. 
+
+A*
+Suorituskerta 1. Aikaa kului 12526 ms
+Suorituskerta 2. Aikaa kului 12462 ms
+Suorituskerta 3. Aikaa kului 12593 ms
+
+
+Dijkstra ei löytänyt polkua alle 3 minuutissa
+
+IDA*
+Suorituskerta 1. Aikaa kului 1499 ms
+Suorituskerta 2. Aikaa kului 1635 ms
+Suorituskerta 3. Aikaa kului 1550 ms
+
+Tällä kartalla näkee, miten paljon A*:ia nopeampi IDA* on verkoissa, joissa ei ole seiniä tai painavia solmuja. 
+
+
+
+
