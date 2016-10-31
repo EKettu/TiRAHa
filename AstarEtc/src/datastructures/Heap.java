@@ -40,7 +40,7 @@ public class Heap {
         int left = left(i);
         int right = right(i);
         int smallest = 0;
-        if (right <= heapsize) {
+        if (right < heapsize) {
             if (table[left].getStartD() + table[left].getEndD()
                     < table[right].getStartD() + table[right].getEndD()) {
                 smallest = left;
@@ -121,7 +121,7 @@ public class Heap {
      * @return the parent node of i
      */
     private int parent(int i) {
-        return i / 2;
+        return (i / 2);
     }
 
     /**
@@ -143,7 +143,7 @@ public class Heap {
      * @return the index of the right child node
      */
     private int right(int i) {
-        return (2 * i) + 1;
+        return (2 * i)+ 1;
     }
 
     public Node[] getNodeTable() {

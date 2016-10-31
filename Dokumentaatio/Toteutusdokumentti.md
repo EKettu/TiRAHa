@@ -21,7 +21,7 @@ Kuten Testausdokumentista ilmenee, A* toimii nopeimmin isoissa verkoissa, joissa
 
 Algoritmini ovat varsin hitaita verrattuna esim. TiRA-kurssilla käytettyihin verkkoalgoritmeihin, mutta tähän vaikuttavat käytössä olevat omat tietorakenteet. Testauksessa en tehnyt kovin monia toistoja per kartta, osittain sen takia, että joidenkin testien suorittamiseen kului niin kauan aikaa. Kuitenkin tehdyistä testeistä voi tehdä havaintoja nopeuksistakin, mutta olisin voinut myös tehdä enemmän vertailevia nopeustestejä. 
 
-Havaitsin A*:issa bugin 30.10.16 (ks. Testausdokumentti), jonka syytä en saanut selvitettyä.
+Havaitsin A*:issa bugin 30.10.16 (ks. Testausdokumentti), joka liittyy keon toimintaan. Sain korjattua bugin A*:in kohdalla, mutta se siirtyi tietyllä kartalla Dijkstraan. Bugi liittyy jotenkin minimikekoni heapify()-metodiin, mutta valitettavasti en ehtinyt selvittää sen syytä tarkkaan. 
 
 IDA* ei tällä hetkellä toimi kunnolla mikäli polkua ei löydy, koska ehdon (temp == Integer.MAX_VALUE) täyttymisessä menee aivan liian kauan. Näin ollen en testannut tätä ominaisuutta JUnit-testeissä. Muutenkin JUnit-testejä olisi varmasti voinut olla enemmänkin.
 

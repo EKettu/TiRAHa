@@ -289,5 +289,6 @@ Suorituskerta 3. Aikaa kului 1550 ms
 Tällä kartalla näkee, miten paljon A*:ia nopeampi IDA* on verkoissa, joissa ei ole seiniä tai painavia solmuja. 
 
 
-
+***Huom!*** Lisäys 31.10.16
+Yritin vielä selvitellä eilen viime tipassa havaitsemaani ongelmaa, ja tulin tulokseen, että se liittyy jotenkin keon toteutukseen. Onnistuin korjaamaan ongelman A*:in kohdalla muuttamalla Heap-luokan riviä 43 siten, että poistin yhtäsuuruusmerkin, eli  "if (right <= heapsize) {" -rivi muuttui muotoon  "if (right < heapsize) {". Nyt A* toimii oikein kartalla map1000_2.txt ja näyttää toimivan myös niillä kartoilla, joita ehdin testata. Sen sijaan Dijkstran algoritmi näyttää polun liian pitkäksi kartalla map500_1.txt (666 vs 660). Keossani on siis joku ongelma, mutta en valitettavasti ehtinyt enää selvittää tarkkaan mikä se on.
 
