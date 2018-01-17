@@ -33,6 +33,7 @@ public class UserInterface {
         String fileName = scanner.nextLine();
         if (fileName.equalsIgnoreCase("x")) {
             System.out.println("Goodbye");
+            return;
         }
         System.out.println("Choose the algorithm. A -> A*, D -> Dijkstra, I -> IDA*, E -> all three");
         String algorithm = scanner.nextLine();
@@ -44,6 +45,11 @@ public class UserInterface {
             NetBuilder netbuild = new NetBuilder();
             FileReader filereader = new FileReader();
             MyArrayList netArray = filereader.readNetFromFile(new File(fileName));
+            
+            if(netArray==null) {
+                System.out.println("Invalid filename, goodbye.");
+                return;
+            }
 
             System.out.println("The original map: ");
             Node[][] net = netbuild.createNetFromArray(netArray);
@@ -53,7 +59,6 @@ public class UserInterface {
 
             if (algorithm.equalsIgnoreCase("A")) {
                 runAstar(net, startNode, endNode, adjArray);
-
             } else if (algorithm.equalsIgnoreCase("D")) {
                 runDijkstra(net, startNode, endNode, adjArray);
             } else if (algorithm.equalsIgnoreCase("I")) {
@@ -62,6 +67,9 @@ public class UserInterface {
                 runAstar(net, startNode, endNode, adjArray);
                 runDijkstra(net, startNode, endNode, adjArray);
                 runIDAstar(net, startNode, endNode, adjArray);
+            }
+            else {
+                System.out.println("Invalid input, goodbye.");
             }
 
         }
